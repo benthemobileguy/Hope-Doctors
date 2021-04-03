@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 
-class MainBloc with ChangeNotifier,{
+class MainBloc with ChangeNotifier{
 
   String _bearerToken;
   User _user;
