@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hope_doctor/bloc/default.dart';
+import 'package:hope_doctor/screens/auth/login-screen.dart';
+import 'package:hope_doctor/screens/home/base.dart';
 import 'package:hope_doctor/utils/pref-manager.dart';
 import 'package:provider/provider.dart';
 class SplashScreen extends StatefulWidget {
@@ -71,7 +73,7 @@ class _SplashScreenState extends State<SplashScreen>
       } else{
         Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (context)
-            => WelcomeScreen()));
+            => LoginScreen()));
       }
     });
 
