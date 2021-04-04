@@ -208,15 +208,30 @@ class _HomePageState extends State<HomePage> {
               child:  Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    "Currently Attending",
-                    textAlign: TextAlign.start,
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontFamily: 'Lato',
-                      color: Colors.white,
-                      fontWeight: FontWeight.w400,
-                    ),
+                  Row(
+                    children: [
+                      Text(
+                        "Currently Attending",
+                        textAlign: TextAlign.start,
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontFamily: 'Lato',
+                          color: Colors.white,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                      Spacer(),
+                      Text(
+                        "CURRENT TIME",
+                        textAlign: TextAlign.start,
+                        style: TextStyle(
+                          fontSize: 10,
+                          fontFamily: 'Lato',
+                          color: Colors.white,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ],
                   ),
                   SizedBox(
                     height: 14,
@@ -302,33 +317,36 @@ class _HomePageState extends State<HomePage> {
                   SizedBox(
                     height: 10,
                   ),
-                  MainButton(
-                    onPressed: (){
+                  Container(
+                    width: 150,
+                    child: MainButton(
+                      onPressed: (){
 
-                    },
-                  color: Colors.white,
-                    child:  Row(
-                      mainAxisSize: MainAxisSize.min,
-                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Mdi.check,
-                          color: primaryColor,
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          "Done",
-                          textAlign: TextAlign.start,
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontFamily: 'Lato',
+                      },
+                    color: Colors.white,
+                      child:  Row(
+                        mainAxisSize: MainAxisSize.min,
+                         mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Mdi.check,
                             color: primaryColor,
-                            fontWeight: FontWeight.w700,
                           ),
-                        ),
-                      ],
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            "Done",
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontFamily: 'Lato',
+                              color: primaryColor,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   )
                 ],
