@@ -62,13 +62,13 @@ class _BaseState extends State<Base> {
                 padding: const EdgeInsets.all(5.0),
                 child:ImageIcon(
                   AssetImage(
-                    "images/icons/home.png",
+                    "images/icons/dashboard.png",
                   ),
                   size: 25,
                 )
             ),
             title: Text(
-              "Home",
+              "Dashboard",
               style: TextStyle(
                 fontWeight: FontWeight.w700,
                 fontFamily: 'Lato',
@@ -81,35 +81,13 @@ class _BaseState extends State<Base> {
                 padding: const EdgeInsets.all(5.0),
                 child:ImageIcon(
                   AssetImage(
-                    _currentIndex!=1?
-                    "images/icons/calendar.png"
-                        :"images/icons/calendar_green.png",
+                    "images/icons/appointment.png",
                   ),
                   size: 25,
                 )
             ),
             title: Text(
-              "Schedule",
-              style: TextStyle(
-                fontWeight: FontWeight.w700,
-                fontFamily: 'Lato',
-                fontSize: 10,
-              ),
-            ),
-          ),
-          new BottomNavigationBarItem(
-            icon: Container(
-                padding: const EdgeInsets.all(10.0),
-                decoration: BoxDecoration(
-                    color: primaryColor,
-                    shape: BoxShape.circle
-                ),
-                child: new SvgPicture.asset(
-                  "images/pain_report.svg",
-                )
-            ),
-            title: Text(
-              "",
+              "Appointments",
               style: TextStyle(
                 fontWeight: FontWeight.w700,
                 fontFamily: 'Lato',
@@ -122,14 +100,13 @@ class _BaseState extends State<Base> {
                 padding: const EdgeInsets.all(5.0),
                 child:ImageIcon(
                   AssetImage(
-                    _currentIndex!=3? "images/icons/profile.png":
-                    "images/icons/profile_green.png",
+                    "images/icons/messages.png",
                   ),
                   size: 25,
                 )
             ),
             title: Text(
-              "Profile",
+              "Messages",
               style: TextStyle(
                 fontWeight: FontWeight.w700,
                 fontFamily: 'Lato',
@@ -142,8 +119,45 @@ class _BaseState extends State<Base> {
                 padding: const EdgeInsets.all(5.0),
                 child:ImageIcon(
                   AssetImage(
-                    _currentIndex!=4? "images/icons/shop.png"
-                        :"images/icons/shop_green.png",
+                 "images/icons/patients.png",
+                  ),
+                  size: 25,
+                )
+            ),
+            title: Text(
+              "Patients",
+              style: TextStyle(
+                fontWeight: FontWeight.w700,
+                fontFamily: 'Lato',
+                fontSize: 10,
+              ),
+            ),
+          ),
+          new BottomNavigationBarItem(
+            icon: Padding(
+                padding: const EdgeInsets.all(5.0),
+                child:ImageIcon(
+                  AssetImage(
+                    "images/icons/health_tips.png",
+                  ),
+                  size: 25,
+                )
+            ),
+            title: Text(
+              "Health Tips",
+              style: TextStyle(
+                fontWeight: FontWeight.w700,
+                fontFamily: 'Lato',
+                fontSize: 10,
+              ),
+            ),
+          ),
+          new BottomNavigationBarItem(
+            icon: Padding(
+                padding: const EdgeInsets.all(5.0),
+                child:ImageIcon(
+                  AssetImage(
+                    "images/icons/shop.png",
                   ),
                   size: 25,
                 )
