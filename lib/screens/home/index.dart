@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hope_doctor/screens/home/components/new-messages.dart';
+import 'package:hope_doctor/screens/home/components/upcoming-appointments.dart';
 import 'package:hope_doctor/theme/style.dart';
 import 'package:mdi/mdi.dart';
 import 'package:hope_doctor/utils/color.dart';
@@ -117,6 +119,9 @@ class _HomePageState extends State<HomePage> {
                 width: MediaQuery.of(context).size.width * 0.7,
                 child: Column(
                   children: [
+                    SizedBox(
+                      height: 30,
+                    ),
                     Row(
                       children: [
                         Expanded(
@@ -749,6 +754,9 @@ class _HomePageState extends State<HomePage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      SizedBox(
+                        height: 30,
+                      ),
                       Row(
                         children: [
                           Text(
@@ -788,15 +796,63 @@ class _HomePageState extends State<HomePage> {
                       SizedBox(
                         height: 20,
                       ),
-                      Container(
-                        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                              color: Color.fromRGBO(7, 121, 101, 0.3), width: 1),
-                          color: Colors.white,
-                          borderRadius: BorderRadius.all(Radius.circular(8)),
-                        ),
-                      )
+                      UpcomingCard(),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      UpcomingCard(),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      UpcomingCard(),
+                      SizedBox(
+                        height: 40,
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            "New Messages",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontFamily: 'Lato',
+                              color: greyColor2,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Container(
+                            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: greyColor2, width: 1),
+                              color: greyColor2,
+                              borderRadius: BorderRadius.all(Radius.circular(8)),
+                            ),
+                            child: Text(
+                              "View All",
+                              textAlign: TextAlign.start,
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontFamily: 'Lato',
+                                color: Colors.white,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
+                          ),
+
+                        ],
+                      ),
+                      NewMessages(),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      NewMessages(),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      NewMessages(),
                     ],
                   ),
 
@@ -810,3 +866,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+
+
+
