@@ -221,15 +221,55 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       Spacer(),
-                      Text(
-                        "CURRENT TIME",
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                          fontSize: 10,
-                          fontFamily: 'Lato',
-                          color: Colors.white,
-                          fontWeight: FontWeight.w400,
-                        ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "CURRENT TIME",
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                              fontSize: 10,
+                              fontFamily: 'Lato',
+                              color: Colors.white,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Container(
+                            width: 150,
+                            child: MainButton(
+                              onPressed: (){
+
+                              },
+                              color: Colors.white,
+                              child:  Row(
+                                mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Mdi.check,
+                                    color: primaryColor,
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text(
+                                    "Done",
+                                    textAlign: TextAlign.start,
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontFamily: 'Lato',
+                                      color: primaryColor,
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          )
+                        ],
                       ),
                     ],
                   ),
