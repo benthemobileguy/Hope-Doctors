@@ -16,6 +16,8 @@ class _MessagesScreenState extends State<MessagesScreen> {
       child: Scaffold(
        appBar: AppBar(
          bottom: TabBar(
+           isScrollable: true,
+           indicatorSize: TabBarIndicatorSize.tab,
            labelColor: primaryColor,
            unselectedLabelColor: greyColor2,
            indicatorColor: primaryColor,
