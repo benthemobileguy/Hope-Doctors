@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hope_doctor/model/user.dart';
 
 
 class MainBloc with ChangeNotifier{

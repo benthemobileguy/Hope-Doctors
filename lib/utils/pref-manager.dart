@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:hope_doctor/model/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 class PrefManager {
   String auth_token = "auth_token";

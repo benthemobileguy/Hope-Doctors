@@ -6,6 +6,7 @@ import 'package:hope_doctor/screens/home/index.dart';
 import 'package:hope_doctor/screens/messages/index.dart';
 import 'package:hope_doctor/screens/patients/index.dart';
 import 'package:hope_doctor/screens/shop/index.dart';
+import 'package:hope_doctor/theme/style.dart';
 
 class Base extends StatefulWidget {
   final int currentIndex;
