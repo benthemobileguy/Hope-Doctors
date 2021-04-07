@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hope_doctor/bloc/default.dart';
+import 'package:hope_doctor/model/date-slots.dart';
+import 'package:hope_doctor/model/days-left-count.dart';
+import 'package:hope_doctor/model/health-tips.dart';
+import 'package:hope_doctor/model/next-appointment.dart';
+import 'package:hope_doctor/model/plans.dart';
+import 'package:hope_doctor/model/upcoming-appointment.dart';
 import 'package:hope_doctor/services/index.dart';
 import 'package:provider/provider.dart';
 
