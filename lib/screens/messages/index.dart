@@ -150,6 +150,80 @@ class _MessagesScreenState extends State<MessagesScreen> {
           ),
         ),
       ),
+        body: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Column(
+            children: [
+              SizedBox(
+                height: 30,
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all
+                    (Radius.circular(8)),
+                  border: Border.all(color: Color.fromRGBO
+                    (80, 80, 80, 0.2), width: 1)
+                ),
+                child: Row(
+                  children: [
+                    CircularProfileAvatar(
+                      profileURL,
+                      //sets image path, it should be a URL string. default value is empty string, if path is empty it will display only initials
+                      radius: 30,
+                      // sets radius, default 50.0
+                      backgroundColor: Colors.transparent,
+                      // sets background color, default Colors.white
+                      borderWidth: 2,
+                      // sets initials text, set your own style, default Text('')
+                      borderColor: Colors.white,
+                      // sets border color, default Colors.white
+                      elevation: 5.0,
+                      // sets elevation (shadow of the profile picture), default value is 0.0
+                      foregroundColor: Colors.brown.withOpacity(0.5),
+                      //sets foreground colour, it works if showInitialTextAbovePicture = true , default Colors.transparent
+                      cacheImage: true,
+                      // allow widget to cache image against provided url
+                      onTap: () {
+                        print('adil');
+                      },
+                      // sets on tap
+                      showInitialTextAbovePicture:
+                      true, // setting it true will show initials text above profile picture, default false
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Floyd Miles",
+                          textAlign: TextAlign.start,
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontFamily: 'Lato',
+                            color: normalTextBold,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          "Please review the pain report sent in",
+                          textAlign: TextAlign.start,
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontFamily: 'Lato',
+                            color: mildGrey,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
       ),
     );
   }

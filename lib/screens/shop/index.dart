@@ -122,7 +122,7 @@ class _ShopScreenState extends State<ShopScreen> {
           ),
         ),
       ),
-      body:  shopList==null?
+      body:
       Column(
         children: [
           SizedBox(
@@ -137,24 +137,127 @@ class _ShopScreenState extends State<ShopScreen> {
                 size: 100.0,
               ),
             ),
-          ): Expanded(child:
-          ShopItem(shopItem:
-          shopList,)),
+          ): Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  height: 130,
+                  width: 240,
+                  margin: EdgeInsets.symmetric(horizontal: 10),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(4),
+                      border: Border.all(color:
+                      primaryColor.withOpacity(0.3),
+                          width: 2),
+                      image: DecorationImage(
+                          fit: BoxFit.contain,
+                          image: AssetImage(
+                            "images/img_1.png",
+                          ))),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 10),
+                  child: Text(
+                    "Organic Ginger Balm",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontFamily: 'Lato',
+                      color: normalTextBold,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 10),
+                  child: Row(
+                    children: [
+                      Text(
+                        "AVAILABLE IN STOCK",
+                        textAlign: TextAlign.start,
+                        style: TextStyle(
+                          fontSize: 10,
+                          fontFamily: 'Lato',
+                          color: darkerText,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 35,
+                      ),
+                      Text(
+                        "RESERVED PRODUCTS",
+                        textAlign: TextAlign.start,
+                        style: TextStyle(
+                          fontSize: 10,
+                          fontFamily: 'Lato',
+                          color: darkerText,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 3,
+                ),
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 10),
+                  child: Row(
+                    children: [
+                      Text(
+                        "182",
+                        textAlign: TextAlign.start,
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontFamily: 'Lato',
+                          color: normalTextBold,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 107,
+                      ),
+                      Text(
+                        "32",
+                        textAlign: TextAlign.start,
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontFamily: 'Lato',
+                          color: normalTextBold,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
         ],
-      ): Expanded(child:
-      ShopItem(shopItem:
-      shopList,)),
+      ),
 
     );
   }
 
   Future<List<MarketShop>> getMarketShop() async {
-    bloc.fetchMarketShop(context).then((value) {
-      setState(() {
-        shopList = value;
-        print(shopList.toString());
-      });
+    setState(() {
+      shopList = [];
     });
-    return shopList;
+    // bloc.fetchMarketShop(context).then((value) {
+    //   setState(() {
+    //     shopList = value;
+    //     print(shopList.toString());
+    //   });
+    // });
+    // return shopList;
   }
 }

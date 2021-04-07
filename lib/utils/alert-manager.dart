@@ -1,6 +1,6 @@
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:hope_clinic/theme/style.dart';
-import 'package:hope_clinic/utils/color.dart';
+import 'package:hope_doctor/theme/style.dart';
+import 'package:hope_doctor/utils/color.dart';
 
 class AlertManager {
   static showToast(String message) {
