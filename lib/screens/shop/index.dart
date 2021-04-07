@@ -13,8 +13,13 @@ class ShopScreen extends StatefulWidget {
 
 class _ShopScreenState extends State<ShopScreen> {
   List<MarketShop> shopList;
+  bool isInitialised = false;
   @override
   Widget build(BuildContext context) {
+    if(!isInitialised){
+      getMarketShop();
+      isInitialised = true;
+    }
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -108,19 +113,32 @@ class _ShopScreenState extends State<ShopScreen> {
         ),
       ),
       body:  shopList==null?
-      Expanded(
-        child: Center(
-          child: SpinKitRipple(
-            borderWidth: 8,
-            color: primaryColor,
-            size: 100.0,
+      Column(
+        children: [
+          SizedBox(
+            height: 30,
           ),
-        ),
-      ):
-      Expanded(child:
+          shopList==null?
+          Expanded(
+            child: Center(
+              child: SpinKitRipple(
+                borderWidth: 8,
+                color: primaryColor,
+                size: 100.0,
+              ),
+            ),
+          ): Expanded(child:
+          ShopItem(shopItem:
+          shopList,)),
+        ],
+      ): Expanded(child:
       ShopItem(shopItem:
       shopList,)),
 
     );
+  }
+
+  void getMarketShop() {
+
   }
 }
