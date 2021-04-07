@@ -844,6 +844,9 @@ class _HomePageState extends State<HomePage> {
 
                         ],
                       ),
+                      SizedBox(
+                        height: 20,
+                      ),
                       NewMessages(),
                       SizedBox(
                         height: 5,
