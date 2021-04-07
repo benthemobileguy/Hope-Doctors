@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hope_doctor/screens/patients/patient-appointment-card.dart';
 import 'package:hope_doctor/theme/style.dart';
 import 'package:mdi/mdi.dart';
 import 'package:circular_profile_avatar/circular_profile_avatar.dart';
@@ -199,32 +200,60 @@ class _PatientsScreenState extends State<PatientsScreen> {
                     fontWeight: FontWeight.w700,
                   ),
                 ),
+                SizedBox(
+                  width: 20,
+                ),
                 Container(
-                  width: 200,
-                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  padding: EdgeInsets.all(10),
                   decoration: BoxDecoration(
                     border: Border.all(
-                        color: Color.fromRGBO(7, 121, 101, 0.3), width: 1),
+                        color:borderColor2, width: 1),
                     color: Colors.white,
-                    borderRadius: BorderRadius.all(Radius.circular(8)),
+                    borderRadius: BorderRadius.all(Radius.circular(24)),
                   ),
-                  child: Row(
-                    children: [
-                      Text(
-                        "Recent Visits Top",
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontFamily: 'Lato',
-                          color: greyColor2,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ],
+                  child: Text(
+                    "Recent Visits Top",
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontFamily: 'Lato',
+                      color: greyColor2,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Container(
+                  padding: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                        color:borderColor2, width: 1),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(Radius.circular(24)),
+                  ),
+                  child: Text(
+                    "Former Visits Top",
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontFamily: 'Lato',
+                      color: greyColor2,
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
                 ),
               ],
             ),
+            SizedBox(
+              height: 10,
+            ),
+            PatientAppointmentCard(),
+            SizedBox(
+              height: 10,
+            ),
+            PatientAppointmentCard()
           ],
         ),
       ),
