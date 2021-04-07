@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hope_doctor/screens/messages/components/chat-component.dart';
 import 'package:hope_doctor/theme/style.dart';
 import 'package:hope_doctor/utils/color.dart';
 import 'package:circular_profile_avatar/circular_profile_avatar.dart';
