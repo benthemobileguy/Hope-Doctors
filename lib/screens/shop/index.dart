@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:hope_doctor/bloc/default.dart';
 import 'package:hope_doctor/model/market-shop.dart';
 import 'package:hope_doctor/screens/shop/components/shop-item.dart';
 import 'package:hope_doctor/theme/style.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:hope_doctor/utils/color.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:circular_profile_avatar/circular_profile_avatar.dart';
@@ -13,7 +15,15 @@ class ShopScreen extends StatefulWidget {
 
 class _ShopScreenState extends State<ShopScreen> {
   List<MarketShop> shopList;
+  MainBloc bloc;
   bool isInitialised = false;
+  @override
+  void didChangeDependencies() async{
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    bloc = Provider.of<MainBloc>(context, listen: false);
+
+  }
   @override
   Widget build(BuildContext context) {
     if(!isInitialised){
@@ -139,6 +149,12 @@ class _ShopScreenState extends State<ShopScreen> {
   }
 
   void getMarketShop() {
-
+    bloc.fetchMarketShop(context).then((value) {
+      setState(() {
+        shopList = value;
+        print(shopList.toString());
+      });
+    });
+    return shopList;
   }
 }
