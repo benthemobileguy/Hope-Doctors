@@ -103,6 +103,46 @@ class _PatientsScreenState extends State<PatientsScreen> {
           ),
         ),
       ),
+      body: Padding(
+        padding: const EdgeInsets.all(14.0),
+        child: Container(
+          width: 230,
+          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+          decoration: BoxDecoration(
+            border: Border.all(
+                color: Color.fromRGBO(7, 121, 101, 0.3), width: 1),
+            color: Colors.white,
+            borderRadius: BorderRadius.all(Radius.circular(8)),
+          ),
+          child: Row(
+            children: [
+              Text(
+                "184",
+                textAlign: TextAlign.start,
+                style: TextStyle(
+                  fontSize: 14,
+                  fontFamily: 'Lato',
+                  color: greyColor2,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              SizedBox(
+                width: 5,
+              ),
+              Text(
+                "Patients",
+                textAlign: TextAlign.start,
+                style: TextStyle(
+                  fontSize: 14,
+                  fontFamily: 'Lato',
+                  color: greyColor2,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
