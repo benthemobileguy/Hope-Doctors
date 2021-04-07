@@ -3,7 +3,7 @@ import 'package:hope_doctor/bloc/default.dart';
 import 'package:hope_doctor/model/market-shop.dart';
 import 'package:hope_doctor/screens/shop/components/shop-item.dart';
 import 'package:hope_doctor/theme/style.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:hope_doctor/utils/color.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:circular_profile_avatar/circular_profile_avatar.dart';
@@ -148,7 +148,7 @@ class _ShopScreenState extends State<ShopScreen> {
     );
   }
 
-  void getMarketShop() {
+  Future<List<MarketShop>> getMarketShop() async {
     bloc.fetchMarketShop(context).then((value) {
       setState(() {
         shopList = value;

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:hope_doctor/bloc/appointment/index.dart';
+import 'package:hope_doctor/bloc/shop/index.dart';
 import 'package:hope_doctor/model/user.dart';
 
 
-class MainBloc with ChangeNotifier{
+class MainBloc with ChangeNotifier,
+    ShopBloc, AppointmentBloc{
 
   String _bearerToken;
   User _user;
