@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:hope_clinic/bloc/index.dart';
-import 'package:hope_clinic/model/market-shop.dart';
-import 'package:hope_clinic/model/reserved-item.dart';
-import 'package:hope_clinic/services/index.dart';
+import 'package:hope_doctor/bloc/default.dart';
+import 'package:hope_doctor/model/market-shop.dart';
+import 'package:hope_doctor/model/reserved-item.dart';
+import 'package:hope_doctor/services/index.dart';
 import 'package:provider/provider.dart';
 
 class  MarketService extends ApiService {

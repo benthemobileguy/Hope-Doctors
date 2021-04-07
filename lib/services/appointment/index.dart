@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hope_clinic/bloc/index.dart';
-import 'package:hope_clinic/model/date-slots.dart';
-import 'package:hope_clinic/model/days-left-count.dart';
-import 'package:hope_clinic/model/health-tips.dart';
-import 'package:hope_clinic/model/next-appointment.dart';
-import 'package:hope_clinic/model/plans.dart';
-import 'package:hope_clinic/model/upcoming-appointment.dart';
-import 'package:hope_clinic/services/index.dart';
+import 'package:hope_doctor/bloc/default.dart';
+import 'package:hope_doctor/services/index.dart';
 import 'package:provider/provider.dart';
 
 class  AppointmentService extends ApiService {

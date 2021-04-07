@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hope_doctor/bloc/default.dart';
+import 'package:hope_doctor/model/user.dart';
 import 'package:hope_doctor/utils/pref-manager.dart';
 
 import 'package:provider/provider.dart';
