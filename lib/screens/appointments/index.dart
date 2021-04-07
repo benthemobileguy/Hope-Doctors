@@ -107,7 +107,8 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
        body: Row(
          children: [
            Container(
-             width: 92,
+             height: 45,
+             width: 130,
              child: MainButton(
                color: primaryColor,
                borderColor: primaryColor,
@@ -127,7 +128,8 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
              width: 30,
            ),
            Container(
-             width: 92,
+             height: 45,
+             width: 130,
              child: MainButton(
                borderColor: primaryColor,
                color: Colors.white,
