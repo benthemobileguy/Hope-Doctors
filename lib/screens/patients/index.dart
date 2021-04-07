@@ -253,7 +253,19 @@ class _PatientsScreenState extends State<PatientsScreen> {
             SizedBox(
               height: 10,
             ),
-            PatientAppointmentCard()
+            PatientAppointmentCard(),
+            SizedBox(
+              height: 10,
+            ),
+            PatientAppointmentCard(),
+            SizedBox(
+              height: 10,
+            ),
+            PatientAppointmentCard(),
+            SizedBox(
+              height: 10,
+            ),
+            PatientAppointmentCard(),
           ],
         ),
       ),

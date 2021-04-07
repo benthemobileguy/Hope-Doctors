@@ -101,7 +101,7 @@ class AppointmentCard extends StatelessWidget {
                   width: 20,
                 ),
                 new Image.asset("images/drop_down.png",
-                  height: 30,width: 30,),
+                  height: 16,width: 16,),
               ],
             ),
           ),
