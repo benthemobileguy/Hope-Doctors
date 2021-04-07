@@ -22,9 +22,9 @@ class ShopItem extends StatelessWidget {
       itemBuilder: (context, index) {
         return GestureDetector(
           onTap: (){
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context)
-                => ProductDetailsPage(item: shopItem[index],)));
+            // Navigator.push(context,
+            //     MaterialPageRoute(builder: (context)
+            //     => ProductDetailsPage(item: shopItem[index],)));
           },
           child: Container(
             child: Column(
