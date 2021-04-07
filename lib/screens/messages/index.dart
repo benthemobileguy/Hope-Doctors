@@ -159,7 +159,37 @@ class _MessagesScreenState extends State<MessagesScreen> {
                 height: 30,
               ),
               ChatComponent
-                (name: "Floyd Miles",)
+                (name: "Floyd Miles",
+              time: "15 MINUTES AGO",
+              message: "Please review the pain report sent in",),
+              SizedBox(
+                height: 10,
+              ),
+              ChatComponent
+                (name: "Devon Lane",
+                time: "3 HOURS AGO",
+                message: "Please review the pain report sent in",),
+              SizedBox(
+                height: 10,
+              ),
+              ChatComponent
+                (name: "Daniel Agbudu",
+                time: "5 HOURS AGO",
+                message: "Please review the pain report sent in",),
+              SizedBox(
+                height: 10,
+              ),
+              ChatComponent
+                (name: "Ronald Richards",
+                time: "1 WEEK AGO",
+                message: "Please review the pain report sent in",),
+              SizedBox(
+                height: 10,
+              ),
+              ChatComponent
+                (name: "Robert Fox",
+                time: "1 MONNTH AGO",
+                message: "Please review the pain report sent in",)
             ],
           ),
         ),
