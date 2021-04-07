@@ -56,7 +56,7 @@ class ChatComponent extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    "Floyd Miles",
+                    name,
                     textAlign: TextAlign.start,
                     style: TextStyle(
                       fontSize: 18,
@@ -71,7 +71,7 @@ class ChatComponent extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(top:6.0),
                     child: Text(
-                      "15 MINUTES AG0",
+                      time,
                       textAlign: TextAlign.start,
                       style: TextStyle(
                         fontSize: 10,
@@ -87,7 +87,7 @@ class ChatComponent extends StatelessWidget {
                 height: 6,
               ),
               Text(
-                "Please review the pain report sent in",
+                message,
                 textAlign: TextAlign.start,
                 style: TextStyle(
                   fontSize: 16,

@@ -158,7 +158,8 @@ class _MessagesScreenState extends State<MessagesScreen> {
               SizedBox(
                 height: 30,
               ),
-              ChatComponent()
+              ChatComponent
+                (name: "Floyd Miles",)
             ],
           ),
         ),
