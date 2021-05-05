@@ -17,7 +17,7 @@ class  AppointmentService extends ApiService {
 
   AppointmentService({@required this.context}) : super(context: context);
 
-  /// get upcoming appointment
+  /// get upcoming appointment count
   Future<UpcomingAppointmentCount> getUpcomingAppointmentCount() async {
     bloc = Provider.of<MainBloc>(context, listen: false);
     Map<String, dynamic> _data =
@@ -25,7 +25,7 @@ class  AppointmentService extends ApiService {
     print(_data);
     UpcomingAppointmentCount _upcomingAppointmentCount;
     _upcomingAppointmentCount = UpcomingAppointmentCount.fromJson(_data['data']);
-    bloc.upcomingAppointment = _upcomingAppointmentCount;
+    bloc.upcomingAppointmentCount = _upcomingAppointmentCount;
     return _upcomingAppointmentCount;
   }
 
