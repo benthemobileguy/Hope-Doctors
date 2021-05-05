@@ -90,7 +90,7 @@ class ChatComponent extends StatelessWidget {
                 message,
                 textAlign: TextAlign.start,
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 14.5,
                   fontFamily: 'Lato',
                   color: mildGrey,
                   fontWeight: FontWeight.w400,

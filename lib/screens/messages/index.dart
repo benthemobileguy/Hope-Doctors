@@ -1,15 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:hope_doctor/bloc/default.dart';
+import 'package:hope_doctor/model/messages.dart';
 import 'package:hope_doctor/screens/messages/components/chat-component.dart';
 import 'package:hope_doctor/theme/style.dart';
+import 'package:intl/intl.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hope_doctor/utils/color.dart';
 import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:hope_doctor/utils/global-variables.dart';
+import 'package:provider/provider.dart';
+import 'package:timeago/timeago.dart' as timeago;
 class MessagesScreen extends StatefulWidget {
   @override
   _MessagesScreenState createState() => _MessagesScreenState();
 }
 
 class _MessagesScreenState extends State<MessagesScreen> {
+  MainBloc mainBloc;
+  final timeAgoFormat = new DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z");
+  List<Messages> fetchedMessages;
+
+  int tabIndex = 0;
+  bool isInitialised = false;
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    mainBloc = Provider.of<MainBloc>(context);
+    if(!isInitialised){
+    networkRequests();
+    }
+    isInitialised = true;
+  }
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -151,50 +173,84 @@ class _MessagesScreenState extends State<MessagesScreen> {
           ),
         ),
       ),
-        body: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Column(
-            children: [
-              SizedBox(
-                height: 30,
+        body: Column(
+          children: [
+           fetchedMessages==null?
+           Expanded(
+              child: Center(
+                child: SpinKitRipple(
+                  borderWidth: 8,
+                  color: primaryColor,
+                  size: 100.0,
+                ),
               ),
-              ChatComponent
-                (name: "Floyd Miles",
-              time: "15 MINUTES AGO",
-              message: "Please review the pain report sent in",),
-              SizedBox(
-                height: 10,
-              ),
-              ChatComponent
-                (name: "Devon Lane",
-                time: "3 HOURS AGO",
-                message: "Please review the pain report sent in",),
-              SizedBox(
-                height: 10,
-              ),
-              ChatComponent
-                (name: "Daniel Agbudu",
-                time: "5 HOURS AGO",
-                message: "Please review the pain report sent in",),
-              SizedBox(
-                height: 10,
-              ),
-              ChatComponent
-                (name: "Ronald Richards",
-                time: "1 WEEK AGO",
-                message: "Please review the pain report sent in",),
-              SizedBox(
-                height: 10,
-              ),
-              ChatComponent
-                (name: "Robert Fox",
-                time: "1 MONNTH AGO",
-                message: "Please review the pain report sent in",)
-            ],
-          ),
+            ):Container(),
+            fetchedMessages!=null?
+            Expanded(
+              child: ListView.builder(
+                      itemCount:  fetchedMessages.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: ChatComponent
+                            (name: '${fetchedMessages[index].senderId.firstname} '
+                              '${fetchedMessages[index].senderId.lastname}',
+                            time: timeago.format(DateTime.parse(fetchedMessages[index].createdAt)),
+                            message: '${fetchedMessages[index].message}',),
+                        );
+                      },
+                    ),
+            ):Container(),
+          ],
         ),
+        // body: Padding(
+        //   padding: const EdgeInsets.all(12.0),
+        //   child: Column(
+        //     children: [
+        //       SizedBox(
+        //         height: 30,
+        //       ),
+        //       SizedBox(
+        //         height: 10,
+        //       ),
+        //       ChatComponent
+        //         (name: "Devon Lane",
+        //         time: "3 HOURS AGO",
+        //         message: "Please review the pain report sent in",),
+        //       SizedBox(
+        //         height: 10,
+        //       ),
+        //       ChatComponent
+        //         (name: "Daniel Agbudu",
+        //         time: "5 HOURS AGO",
+        //         message: "Please review the pain report sent in",),
+        //       SizedBox(
+        //         height: 10,
+        //       ),
+        //       ChatComponent
+        //         (name: "Ronald Richards",
+        //         time: "1 WEEK AGO",
+        //         message: "Please review the pain report sent in",),
+        //       SizedBox(
+        //         height: 10,
+        //       ),
+        //       ChatComponent
+        //         (name: "Robert Fox",
+        //         time: "1 MONNTH AGO",
+        //         message: "Please review the pain report sent in",)
+        //     ],
+        //   ),
+        // ),
       ),
     );
+  }
+
+  void networkRequests() {
+    mainBloc.fetchMessages(context).then((value){
+      setState(() {
+        fetchedMessages = value;
+      });
+    });
   }
 }
 
