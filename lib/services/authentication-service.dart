@@ -25,12 +25,14 @@ class AuthenticationService extends ApiService {
     Map<String, dynamic> _response =
     await post('login', data);
     if(_response["status"] == true){
-      String token = _response["token"];
-      bloc.bearerToken = token;
-      prefManager.setAuthToken(token);
-      prefManager.setUserData(_response['user']);
-      bloc.user = User.fromJson(_response['user']);
-      print("token" +token);
+      if(_response['user']['role'] == "doctor"){
+        String token = _response["token"];
+        bloc.bearerToken = token;
+        prefManager.setAuthToken(token);
+        prefManager.setUserData(_response['user']);
+        bloc.user = User.fromJson(_response['user']);
+        print("token" +token);
+      }
     }
     return _response;
   }

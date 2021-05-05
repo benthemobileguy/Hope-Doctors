@@ -193,7 +193,7 @@ class _LoginScreenState extends State<LoginScreen> {
       try{
         Map<String, dynamic> _res = await
         authenticationService.login(_email, _password);
-        if(_res['role'] == "doctor"){
+        if(_res['user']['role'] == "doctor"){
           Navigator.pushReplacement(context,
               MaterialPageRoute(builder: (context)
               => Base()));
@@ -201,7 +201,8 @@ class _LoginScreenState extends State<LoginScreen> {
             _loading = false;
           });
         }else{
-          AlertManager.showToast("Only doctor login required");
+          AlertManager.showToast("Oops! Only doctor login required");
+          AlertManager.showToast("Oops! Only doctor login required");
           setState(() {
             _loading = false;
           });
