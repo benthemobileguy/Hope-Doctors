@@ -5,6 +5,7 @@ import 'package:hope_doctor/model/health-tips.dart';
 import 'package:hope_doctor/model/next-appointment.dart';
 import 'package:hope_doctor/model/plans.dart';
 import 'package:hope_doctor/model/upcoming-appointment-count.dart';
+import 'package:hope_doctor/model/upcoming-appointment.dart';
 import 'package:hope_doctor/services/appointment/index.dart';
 
 class AppointmentBloc extends ChangeNotifier {
@@ -14,6 +15,7 @@ class AppointmentBloc extends ChangeNotifier {
   List<HealthTips> _healthTips;
   List<Dateslots> _dateSlots;
   UpcomingAppointmentCount _upcomingAppointmentCount;
+  UpcomingAppointment _upcomingAppointment;
   UpcomingAppointmentCount get upcomingAppointmentCount {
     return _upcomingAppointmentCount;
   }
@@ -69,12 +71,31 @@ class AppointmentBloc extends ChangeNotifier {
     notifyListeners();
     return _nextAppointment;
   }
-  ///fetch upcoming appointment
-  Future<UpcomingAppointmentCount> fetchUpcomingAppointment(BuildContext context) async {
+  ///fetch upcoming appointment count
+  Future<UpcomingAppointmentCount> fetchUpcomingAppointmentCount(BuildContext context) async {
     AppointmentService appointmentService = new  AppointmentService(
         context: context);
     UpcomingAppointmentCount _upcomingAppointment = await appointmentService.getUpcomingAppointmentCount();
     this._upcomingAppointmentCount = _upcomingAppointment;
+    notifyListeners();
+    return _upcomingAppointment;
+  }
+  ///fetch upcoming appointment
+  Future<UpcomingAppointment> fetchUpcomingAppointment(BuildContext context) async {
+    AppointmentService appointmentService = new  AppointmentService(
+        context: context);
+    UpcomingAppointment _upcomingAppointment = await appointmentService.getUpcomingAppointment();
+    this._upcomingAppointment = _upcomingAppointment;
+    notifyListeners();
+    return _upcomingAppointment;
+  }
+
+  ///fetch current appointment
+  Future<UpcomingAppointment> fetchUCurrentAppointment(BuildContext context) async {
+    AppointmentService appointmentService = new  AppointmentService(
+        context: context);
+    UpcomingAppointment _upcomingAppointment = await appointmentService.getUpcomingAppointment();
+    this._upcomingAppointment = _upcomingAppointment;
     notifyListeners();
     return _upcomingAppointment;
   }
