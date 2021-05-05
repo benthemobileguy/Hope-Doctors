@@ -512,6 +512,7 @@ class _HomePageState extends State<HomePage> {
                                     height:50,
                                     child: MainButton(
                                       borderColor: Colors.white,
+                                      disabledColor: Colors.white,
                                       onPressed: () {},
                                       color: Colors.transparent,
                                       child: Row(
