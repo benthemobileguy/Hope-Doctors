@@ -7,7 +7,6 @@ class Messages {
   String message;
   String createdAt;
   String updatedAt;
-
   Messages(
       {this.id,
         this.senderId,
@@ -125,14 +124,14 @@ class SenderId {
   }
 }
 
-class Links {
+class Link {
   String url;
   String label;
   bool active;
 
-  Links({this.url, this.label, this.active});
+  Link({this.url, this.label, this.active});
 
-  Links.fromJson(Map<String, dynamic> json) {
+  Link.fromJson(Map<String, dynamic> json) {
     url = json['url'];
     label = json['label'];
     active = json['active'];

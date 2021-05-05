@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:hope_doctor/bloc/default.dart';
 import 'package:hope_doctor/model/messages.dart';
 import 'package:hope_doctor/screens/messages/components/chat-component.dart';
 import 'package:hope_doctor/theme/style.dart';
 import 'package:intl/intl.dart';
+import 'package:hope_doctor/utils/links.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hope_doctor/utils/color.dart';
 import 'package:circular_profile_avatar/circular_profile_avatar.dart';
@@ -196,6 +199,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
                             (name: '${fetchedMessages[index].senderId.firstname} '
                               '${fetchedMessages[index].senderId.lastname}',
                             time: timeago.format(DateTime.parse(fetchedMessages[index].createdAt)),
+                            profileUrl:  Links.cloudinaryLink+fetchedMessages[index].senderId.profilePhotoUrl,
                             message: '${fetchedMessages[index].message}',),
                         );
                       },
@@ -203,44 +207,6 @@ class _MessagesScreenState extends State<MessagesScreen> {
             ):Container(),
           ],
         ),
-        // body: Padding(
-        //   padding: const EdgeInsets.all(12.0),
-        //   child: Column(
-        //     children: [
-        //       SizedBox(
-        //         height: 30,
-        //       ),
-        //       SizedBox(
-        //         height: 10,
-        //       ),
-        //       ChatComponent
-        //         (name: "Devon Lane",
-        //         time: "3 HOURS AGO",
-        //         message: "Please review the pain report sent in",),
-        //       SizedBox(
-        //         height: 10,
-        //       ),
-        //       ChatComponent
-        //         (name: "Daniel Agbudu",
-        //         time: "5 HOURS AGO",
-        //         message: "Please review the pain report sent in",),
-        //       SizedBox(
-        //         height: 10,
-        //       ),
-        //       ChatComponent
-        //         (name: "Ronald Richards",
-        //         time: "1 WEEK AGO",
-        //         message: "Please review the pain report sent in",),
-        //       SizedBox(
-        //         height: 10,
-        //       ),
-        //       ChatComponent
-        //         (name: "Robert Fox",
-        //         time: "1 MONNTH AGO",
-        //         message: "Please review the pain report sent in",)
-        //     ],
-        //   ),
-        // ),
       ),
     );
   }

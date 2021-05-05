@@ -6,8 +6,9 @@ class ChatComponent extends StatelessWidget {
   final String name;
   final String message;
   final String time;
+  final String profileUrl;
   const ChatComponent({
-    Key key, this.name, this.message, this.time,
+    Key key, this.name, this.profileUrl, this.message, this.time,
   }) : super(key: key);
 
   @override
@@ -24,7 +25,7 @@ class ChatComponent extends StatelessWidget {
         children: [
 
           CircularProfileAvatar(
-            profileURL,
+            profileUrl,
             //sets image path, it should be a URL string. default value is empty string, if path is empty it will display only initials
             radius: 25,
             // sets radius, default 50.0
