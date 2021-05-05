@@ -16,13 +16,17 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   MainBloc mainBloc;
+  bool isDataLoaded = false;
   bool isInitialised = false;
   @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
     mainBloc = Provider.of<MainBloc>(context);
-
+    if(!isInitialised){
+      fetchNetworkRequests();
+    }
+    isInitialised = true;
   }
   @override
   Widget build(BuildContext context) {
@@ -932,6 +936,17 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+  }
+
+  Future<void> fetchNetworkRequests() async {
+   await mainBloc.fetchUpcomingAppointment(context);
+   Future.wait({
+   mainBloc.fetchCurrentAppointment(context),
+   }).then((value) {
+     setState(() {
+       isDataLoaded = true;
+     });
+   });
   }
 }
 
