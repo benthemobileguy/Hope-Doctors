@@ -519,7 +519,8 @@ class _HomePageState extends State<HomePage> {
                                         mainAxisSize: MainAxisSize.min,
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
-                                          new Image.asset('images/notes.png'),
+                                          new Image.asset('images/notes.png',
+                                            width: 30,height: 30,),
                                           SizedBox(
                                             width: 10,
                                           ),

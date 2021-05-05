@@ -4,7 +4,7 @@ import 'package:hope_doctor/model/days-left-count.dart';
 import 'package:hope_doctor/model/health-tips.dart';
 import 'package:hope_doctor/model/next-appointment.dart';
 import 'package:hope_doctor/model/plans.dart';
-import 'package:hope_doctor/model/upcoming-appointment.dart';
+import 'package:hope_doctor/model/upcoming-appointment-count.dart';
 import 'package:hope_doctor/services/appointment/index.dart';
 
 class AppointmentBloc extends ChangeNotifier {
@@ -13,9 +13,9 @@ class AppointmentBloc extends ChangeNotifier {
   List<Plans> _plans;
   List<HealthTips> _healthTips;
   List<Dateslots> _dateSlots;
-  UpcomingAppointment _upcomingAppointment;
-  UpcomingAppointment get upcomingAppointment {
-    return _upcomingAppointment;
+  UpcomingAppointmentCount _upcomingAppointmentCount;
+  UpcomingAppointmentCount get upcomingAppointmentCount {
+    return _upcomingAppointmentCount;
   }
   set healthTips(List<HealthTips> _data) {
     this._healthTips = _data;
@@ -39,8 +39,8 @@ class AppointmentBloc extends ChangeNotifier {
   List<Dateslots> get dateSlots {
     return _dateSlots;
   }
-  set upcomingAppointment(UpcomingAppointment _data) {
-    this._upcomingAppointment = _data;
+  set upcomingAppointment(UpcomingAppointmentCount _data) {
+    this._upcomingAppointmentCount = _data;
     notifyListeners();
   }
 
@@ -70,11 +70,11 @@ class AppointmentBloc extends ChangeNotifier {
     return _nextAppointment;
   }
   ///fetch upcoming appointment
-  Future<UpcomingAppointment> fetchUpcomingAppointment(BuildContext context) async {
+  Future<UpcomingAppointmentCount> fetchUpcomingAppointment(BuildContext context) async {
     AppointmentService appointmentService = new  AppointmentService(
         context: context);
-    UpcomingAppointment _upcomingAppointment = await appointmentService.getUpcomingAppointment();
-    this._upcomingAppointment = _upcomingAppointment;
+    UpcomingAppointmentCount _upcomingAppointment = await appointmentService.getUpcomingAppointmentCount();
+    this._upcomingAppointmentCount = _upcomingAppointment;
     notifyListeners();
     return _upcomingAppointment;
   }

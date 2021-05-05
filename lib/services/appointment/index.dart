@@ -5,7 +5,7 @@ import 'package:hope_doctor/model/days-left-count.dart';
 import 'package:hope_doctor/model/health-tips.dart';
 import 'package:hope_doctor/model/next-appointment.dart';
 import 'package:hope_doctor/model/plans.dart';
-import 'package:hope_doctor/model/upcoming-appointment.dart';
+import 'package:hope_doctor/model/upcoming-appointment-count.dart';
 import 'package:hope_doctor/services/index.dart';
 import 'package:provider/provider.dart';
 
@@ -16,15 +16,15 @@ class  AppointmentService extends ApiService {
   AppointmentService({@required this.context}) : super(context: context);
 
   /// get upcoming appointment
-  Future<UpcomingAppointment> getUpcomingAppointment() async {
+  Future<UpcomingAppointmentCount> getUpcomingAppointmentCount() async {
     bloc = Provider.of<MainBloc>(context, listen: false);
     Map<String, dynamic> _data =
     await get('count/upcoming/appointment');
     print(_data);
-    UpcomingAppointment _upcomingAppointment;
-    _upcomingAppointment = UpcomingAppointment.fromJson(_data['data']);
-    bloc.upcomingAppointment = _upcomingAppointment;
-    return _upcomingAppointment;
+    UpcomingAppointmentCount _upcomingAppointmentCount;
+    _upcomingAppointmentCount = UpcomingAppointmentCount.fromJson(_data['data']);
+    bloc.upcomingAppointment = _upcomingAppointmentCount;
+    return _upcomingAppointmentCount;
   }
 
   /// get next appointment

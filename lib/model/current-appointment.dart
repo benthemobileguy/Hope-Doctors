@@ -1,5 +1,5 @@
 
-class UpcomingAppointment {
+class CurrentAppointment {
   int id;
   int userId;
   int planId;
@@ -13,7 +13,7 @@ class UpcomingAppointment {
   Dateslot dateslot;
   Timeslot timeslot;
 
-  UpcomingAppointment(
+  CurrentAppointment(
       {this.id,
         this.userId,
         this.planId,
@@ -27,7 +27,7 @@ class UpcomingAppointment {
         this.dateslot,
         this.timeslot});
 
-  UpcomingAppointment.fromJson(Map<String, dynamic> json) {
+  CurrentAppointment.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     userId = json['user_id'];
     planId = json['plan_id'];

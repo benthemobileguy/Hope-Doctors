@@ -5,7 +5,7 @@ import 'package:hope_doctor/model/health-tips.dart';
 import 'package:hope_doctor/model/messages.dart';
 import 'package:hope_doctor/model/next-appointment.dart';
 import 'package:hope_doctor/model/plans.dart';
-import 'package:hope_doctor/model/upcoming-appointment.dart';
+import 'package:hope_doctor/model/upcoming-appointment-count.dart';
 import 'package:hope_doctor/services/appointment/index.dart';
 import 'package:hope_doctor/services/messages/index.dart';
 

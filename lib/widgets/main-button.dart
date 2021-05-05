@@ -19,7 +19,7 @@ class MainButton extends StatelessWidget {
       decoration: BoxDecoration(
           border: Border.all(
               color: borderColor != null ? borderColor : Colors.transparent,
-              width: 0.5
+              width: 2
           ),
           borderRadius: BorderRadius
               .all(Radius.circular(12))
