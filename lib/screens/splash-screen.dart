@@ -41,7 +41,7 @@ class _SplashScreenState extends State<SplashScreen>
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
-    mainBloc = Provider.of<MainBloc>(context);
+    mainBloc = Provider.of<MainBloc>(context, listen:false);
   }
   @override
   void initState() {
@@ -73,7 +73,7 @@ class _SplashScreenState extends State<SplashScreen>
       } else{
         Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (context)
-            => Base()));
+            => LoginScreen()));
       }
     });
 
