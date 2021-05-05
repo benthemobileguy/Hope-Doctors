@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:hope_doctor/bloc/default.dart';
+import 'package:hope_doctor/model/current-appointment.dart';
 import 'package:hope_doctor/model/date-slots.dart';
 import 'package:hope_doctor/model/days-left-count.dart';
 import 'package:hope_doctor/model/health-tips.dart';
 import 'package:hope_doctor/model/next-appointment.dart';
 import 'package:hope_doctor/model/plans.dart';
 import 'package:hope_doctor/model/upcoming-appointment-count.dart';
+import 'package:hope_doctor/model/upcoming-appointment.dart';
 import 'package:hope_doctor/services/index.dart';
 import 'package:provider/provider.dart';
 
@@ -86,5 +88,28 @@ class  AppointmentService extends ApiService {
     _dateSlots = Dateslots.fromJsonList(_data['data']['dateslots']);
     bloc.dateSlots = _dateSlots;
     return _dateSlots;
+  }
+
+  /// get current appointment
+  Future<CurrentAppointment> getCurrentAppointment() async {
+    bloc = Provider.of<MainBloc>(context, listen: false);
+    Map<String, dynamic> _data =
+    await get('doc/current/appointment');
+    print(_data);
+    CurrentAppointment _currentAppointment;
+    _currentAppointment = CurrentAppointment.fromJson(_data['data']);
+    bloc.currentAppointment = _currentAppointment;
+    return _currentAppointment;
+  }
+  /// get upcoming appointment
+  Future<UpcomingAppointment> getUpcomingAppointment() async {
+    bloc = Provider.of<MainBloc>(context, listen: false);
+    Map<String, dynamic> _data =
+    await get('doc/upcoming/appointment');
+    print(_data);
+    UpcomingAppointment _upcomingAppointment;
+    _upcomingAppointment = UpcomingAppointment.fromJson(_data['data']);
+    bloc.upcomingAppointment = _upcomingAppointment;
+    return _upcomingAppointment;
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hope_doctor/model/current-appointment.dart';
 import 'package:hope_doctor/model/date-slots.dart';
 import 'package:hope_doctor/model/days-left-count.dart';
 import 'package:hope_doctor/model/health-tips.dart';
@@ -15,6 +16,7 @@ class AppointmentBloc extends ChangeNotifier {
   List<HealthTips> _healthTips;
   List<Dateslots> _dateSlots;
   UpcomingAppointmentCount _upcomingAppointmentCount;
+  CurrentAppointment _currentAppointment;
   UpcomingAppointment _upcomingAppointment;
   UpcomingAppointmentCount get upcomingAppointmentCount {
     return _upcomingAppointmentCount;
@@ -41,8 +43,28 @@ class AppointmentBloc extends ChangeNotifier {
   List<Dateslots> get dateSlots {
     return _dateSlots;
   }
-  set upcomingAppointment(UpcomingAppointmentCount _data) {
+  set upcomingAppointmentCount(UpcomingAppointmentCount _data) {
     this._upcomingAppointmentCount = _data;
+    notifyListeners();
+  }
+  CurrentAppointment get currentAppointment {
+    return _currentAppointment;
+  }
+
+  set currentAppointment(CurrentAppointment _data) {
+    this._currentAppointment = _data;
+    notifyListeners();
+  }
+
+  UpcomingAppointment get upcomingAppointment {
+    return _upcomingAppointment;
+  }
+  set upcomingAppointment(UpcomingAppointment _data) {
+    this._upcomingAppointment = _data;
+    notifyListeners();
+  }
+  set nextAppointment(NextAppointment _data) {
+    this._nextAppointment = _data;
     notifyListeners();
   }
 
@@ -50,10 +72,6 @@ class AppointmentBloc extends ChangeNotifier {
     return _nextAppointment;
   }
 
-  set nextAppointment(NextAppointment _data) {
-    this._nextAppointment = _data;
-    notifyListeners();
-  }
   DaysLeftCount get daysLeftCount {
     return _daysLeftCount;
   }
@@ -91,13 +109,13 @@ class AppointmentBloc extends ChangeNotifier {
   }
 
   ///fetch current appointment
-  Future<UpcomingAppointment> fetchUCurrentAppointment(BuildContext context) async {
+  Future<CurrentAppointment> fetchCurrentAppointment(BuildContext context) async {
     AppointmentService appointmentService = new  AppointmentService(
         context: context);
-    UpcomingAppointment _upcomingAppointment = await appointmentService.getUpcomingAppointment();
-    this._upcomingAppointment = _upcomingAppointment;
+    CurrentAppointment _currentAppointment = await appointmentService.getCurrentAppointment();
+    this._currentAppointment = _currentAppointment;
     notifyListeners();
-    return _upcomingAppointment;
+    return _currentAppointment;
   }
   ///fetch days left count
   Future<DaysLeftCount> fetchDaysLeftCount(BuildContext context) async {
