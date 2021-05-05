@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hope_doctor/bloc/default.dart';
 import 'package:hope_doctor/screens/home/components/new-messages.dart';
 import 'package:hope_doctor/screens/home/components/upcoming-appointments.dart';
 import 'package:hope_doctor/theme/style.dart';
@@ -7,13 +8,20 @@ import 'package:hope_doctor/utils/color.dart';
 import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:hope_doctor/utils/global-variables.dart';
 import 'package:hope_doctor/widgets/main-button.dart';
-
+import 'package:provider/provider.dart';
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+  MainBloc mainBloc;
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    mainBloc = Provider.of<MainBloc>(context);
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
