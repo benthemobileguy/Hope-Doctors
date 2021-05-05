@@ -471,36 +471,72 @@ class _HomePageState extends State<HomePage> {
                               SizedBox(
                                 height: 10,
                               ),
-                              Container(
-                                width: 150,
-                                height:50,
-                                child: MainButton(
-                                  onPressed: () {},
-                                  color: Colors.white,
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Icon(
-                                        Mdi.check,
-                                        color: primaryColor,
+                              Row(
+                                children: [
+                                  Container(
+                                    width: 170,
+                                    height:50,
+                                    child: MainButton(
+                                      onPressed: () {},
+                                      color: Colors.white,
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Icon(
+                                            Mdi.check,
+                                            color: primaryColor,
+                                          ),
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                          Text(
+                                            "Done",
+                                            textAlign: TextAlign.start,
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              fontFamily: 'Lato',
+                                              color: primaryColor,
+                                              fontWeight: FontWeight.w700,
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      Text(
-                                        "Done",
-                                        textAlign: TextAlign.start,
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          fontFamily: 'Lato',
-                                          color: primaryColor,
-                                          fontWeight: FontWeight.w700,
-                                        ),
-                                      ),
-                                    ],
+                                    ),
                                   ),
-                                ),
+                                  SizedBox(
+                                    width: 16,
+                                  ),
+                                  Container(
+                                    width: 170,
+                                    height:50,
+                                    child: MainButton(
+                                      borderColor: Colors.white,
+                                      onPressed: () {},
+                                      color: Colors.transparent,
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          new Image.asset('images/notes.png'),
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                          Text(
+                                            "Take Notes",
+                                            textAlign: TextAlign.start,
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              fontFamily: 'Lato',
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.w700,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                               SizedBox(
                                 height: 20,

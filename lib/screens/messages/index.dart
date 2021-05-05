@@ -31,7 +31,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
     super.didChangeDependencies();
     mainBloc = Provider.of<MainBloc>(context);
     if(!isInitialised){
-    networkRequests();
+    networkRequest();
     }
     isInitialised = true;
   }
@@ -42,6 +42,13 @@ class _MessagesScreenState extends State<MessagesScreen> {
       child: Scaffold(
        appBar: AppBar(
          bottom: TabBar(
+           onTap: (index){
+             setState(() {
+               fetchedMessages = null;
+               tabIndex = index;
+               networkRequest();
+             });
+           },
            isScrollable: true,
            indicatorSize: TabBarIndicatorSize.tab,
            labelColor: primaryColor,
@@ -211,10 +218,27 @@ class _MessagesScreenState extends State<MessagesScreen> {
     );
   }
 
-  void networkRequests() {
+  void networkRequest() {
     mainBloc.fetchMessages(context).then((value){
       setState(() {
-        fetchedMessages = value;
+        switch(tabIndex){
+          case 0:
+            fetchedMessages = mainBloc.messages.
+            where((element) => element.type == "pain-in-the-body").toList();
+            break;
+          case 1:
+            fetchedMessages = mainBloc.messages.
+            where((element) => element.type == "leave-a-review").toList();
+            break;
+          case 2:
+            fetchedMessages = mainBloc.messages.
+            where((element) => element.type == "complaint").toList();
+            break;
+          case 3:
+            fetchedMessages = mainBloc.messages.
+            where((element) => element.type == "missed-appointment").toList();
+            break;
+        }
       });
     });
   }
