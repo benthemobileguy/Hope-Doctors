@@ -16,11 +16,13 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   MainBloc mainBloc;
+  bool isInitialised = false;
   @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
     mainBloc = Provider.of<MainBloc>(context);
+
   }
   @override
   Widget build(BuildContext context) {
