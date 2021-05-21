@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hope_doctor/bloc/default.dart';
 import 'package:hope_doctor/screens/home/components/new-messages.dart';
 import 'package:hope_doctor/screens/home/components/upcoming-appointments.dart';
+import 'package:hope_doctor/shimmers/shimmer-home.dart';
+import 'package:hope_doctor/shimmers/shimmer-list-view.dart';
 import 'package:hope_doctor/theme/style.dart';
 import 'package:mdi/mdi.dart';
 import 'package:hope_doctor/utils/color.dart';
@@ -123,7 +125,9 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-      body: Container(
+      body: !isDataLoaded?
+      ShimmerHome():
+      Container(
         width: double.infinity,
         child: SingleChildScrollView(
           child: Stack(

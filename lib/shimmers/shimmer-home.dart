@@ -4,15 +4,15 @@ class ShimmerHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: EdgeInsets.all(25.0),
+        padding: EdgeInsets.symmetric(horizontal:25.0, vertical: 40),
         child:Center(
           child: Shimmer.fromColors(
               direction: ShimmerDirection.rtl,
               period: Duration(seconds:5),
               child: Column(
-                children: [0, 1, 2, 3]
+                children: [0, 1, 2, 3,4,5]
                     .map((_) => Padding(
-                  padding: const EdgeInsets.only(bottom: 8.0),
+                  padding: const EdgeInsets.only(bottom: 30.0),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
