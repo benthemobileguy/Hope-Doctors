@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:hope_doctor/bloc/default.dart';
 import 'package:hope_doctor/model/messages.dart';
