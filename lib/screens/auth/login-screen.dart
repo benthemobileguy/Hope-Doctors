@@ -192,7 +192,7 @@ class _LoginScreenState extends State<LoginScreen> {
       });
       try{
         Map<String, dynamic> _res = await
-        authenticationService.login(_email, _password);
+        authenticationService.login(_email.trim(), _password.trim());
         if(_res['user']['role'] == "doctor"){
           Navigator.pushReplacement(context,
               MaterialPageRoute(builder: (context)

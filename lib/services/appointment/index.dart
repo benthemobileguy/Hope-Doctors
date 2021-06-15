@@ -106,10 +106,15 @@ class  AppointmentService extends ApiService {
     bloc = Provider.of<MainBloc>(context, listen: false);
     Map<String, dynamic> _data =
     await get('doc/upcoming/appointment');
-    print(_data);
+    print(_data['upcomingAppointment']);
     UpcomingAppointment _upcomingAppointment;
-    _upcomingAppointment = UpcomingAppointment.fromJson(_data['data']);
-    bloc.upcomingAppointment = _upcomingAppointment;
+    try{
+      _upcomingAppointment = UpcomingAppointment.fromJson(_data['upcomingAppointment']);
+      bloc.upcomingAppointment = _upcomingAppointment;
+    }catch(e){
+      print(e.toString());
+    }
+
     return _upcomingAppointment;
   }
 }

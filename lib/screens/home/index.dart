@@ -20,6 +20,7 @@ class _HomePageState extends State<HomePage> {
   MainBloc mainBloc;
   bool isDataLoaded = false;
   bool isInitialised = false;
+
   @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
@@ -943,9 +944,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> fetchNetworkRequests() async {
-   await mainBloc.fetchUpcomingAppointment(context);
+   // mainBloc.fetchUpcomingAppointment(context);
    Future.wait({
-   mainBloc.fetchCurrentAppointment(context),
+  // mainBloc.fetchCurrentAppointment(context),
    }).then((value) {
      setState(() {
        isDataLoaded = true;
