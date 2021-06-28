@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hope_doctor/bloc/default.dart';
+import 'package:hope_doctor/screens/auth/sign-up-page.dart';
 import 'package:hope_doctor/screens/components/default-text-form-field.dart';
 import 'package:hope_doctor/screens/components/main-button.dart';
 import 'package:hope_doctor/screens/home/base.dart';
@@ -173,6 +174,40 @@ class _LoginScreenState extends State<LoginScreen> {
                       signIn();
                     },
                   ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Don't have an account?",
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontFamily: 'Lato',
+                        color: HexColor("#444444"),
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                    FlatButton(
+                      padding: EdgeInsets.only(left: 5, right: 5),
+                      minWidth: 40,
+                      onPressed: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context)
+                            => SignUpPage()));
+                      },
+                      child: Text(
+                        "Sign Up",
+                        textAlign: TextAlign.start,
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontFamily: 'Lato',
+                          color: primaryColor,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
                 SizedBox(
                   height: 40,
