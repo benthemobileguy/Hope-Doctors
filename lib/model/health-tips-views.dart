@@ -16,4 +16,7 @@ class HealthTipViews {
     data['view'] = this.view;
     return data;
   }
+  static List<HealthTipViews> fromJsonList(List<dynamic> _list) {
+    return _list.map((_tips) => HealthTipViews.fromJson(_tips)).toList();
+  }
 }

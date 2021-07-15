@@ -3,6 +3,7 @@ import 'package:hope_doctor/model/current-appointment.dart';
 import 'package:hope_doctor/model/date-slots.dart';
 import 'package:hope_doctor/model/days-left-count.dart';
 import 'package:hope_doctor/model/health-tips.dart';
+import 'package:hope_doctor/model/message.dart';
 import 'package:hope_doctor/model/next-appointment.dart';
 import 'package:hope_doctor/model/plans.dart';
 import 'package:hope_doctor/model/upcoming-appointment-count.dart';
@@ -13,6 +14,7 @@ class AppointmentBloc extends ChangeNotifier {
   NextAppointment _nextAppointment;
   DaysLeftCount _daysLeftCount;
   List<Plans> _plans;
+  List<Message> _message;
   List<HealthTips> _healthTips;
   List<Dateslots> _dateSlots;
   UpcomingAppointmentCount _upcomingAppointmentCount;
@@ -20,6 +22,13 @@ class AppointmentBloc extends ChangeNotifier {
   UpcomingAppointment _upcomingAppointment;
   UpcomingAppointmentCount get upcomingAppointmentCount {
     return _upcomingAppointmentCount;
+  }
+  List<Message> get message {
+    return _message;
+  }
+  set message(List<Message> _data) {
+    this._message = _data;
+    notifyListeners();
   }
   set healthTips(List<HealthTips> _data) {
     this._healthTips = _data;
@@ -126,6 +135,7 @@ class AppointmentBloc extends ChangeNotifier {
     notifyListeners();
     return _daysLeftCount;
   }
+
   ///fetch health Tips
   Future<List<HealthTips>> fetchHealthTips(BuildContext context) async {
     AppointmentService appointmentService = new  AppointmentService(

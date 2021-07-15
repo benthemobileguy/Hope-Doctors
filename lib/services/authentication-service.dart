@@ -51,6 +51,14 @@ class AuthenticationService extends ApiService {
     Map<String, dynamic> _response = await get('userDetails');
     return _response;
   }
+  Future<Map<String, dynamic>> fetchStat() async {
+    Map<String, dynamic> _response = await get('stat');
+    return _response;
+  }
+  Future<Map<String, dynamic>> fetchHealthTipsViews() async {
+    Map<String, dynamic> _response = await get('health/tip/all/views');
+    return _response;
+  }
   Future<Map<String, dynamic>> verifyOTP(Map<String, dynamic> data) async {
     bloc = Provider.of<MainBloc>(context, listen:false);
     Map<String, dynamic> _response = await post('verify-account', data);

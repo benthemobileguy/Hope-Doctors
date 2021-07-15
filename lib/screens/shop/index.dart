@@ -86,7 +86,8 @@ class _ShopScreenState extends State<ShopScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "Onuoha Okigwe",
+                '${bloc.user.firstname} '
+                    '${bloc.user.lastname}',
                 textAlign: TextAlign.start,
                 style: TextStyle(
                   fontSize: 14,

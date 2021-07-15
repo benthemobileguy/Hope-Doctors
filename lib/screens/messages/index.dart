@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:hope_doctor/bloc/default.dart';
 import 'package:hope_doctor/model/messages.dart';
+import 'package:hope_doctor/screens/messages/chat-screen.dart';
 import 'package:hope_doctor/screens/messages/components/chat-component.dart';
 import 'package:hope_doctor/theme/style.dart';
 import 'package:intl/intl.dart';
@@ -146,7 +147,8 @@ class _MessagesScreenState extends State<MessagesScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "Onuoha Okigwe",
+                '${mainBloc.user.firstname} '
+                    '${mainBloc.user.lastname}',
                 textAlign: TextAlign.start,
                 style: TextStyle(
                   fontSize: 14,
@@ -205,6 +207,11 @@ class _MessagesScreenState extends State<MessagesScreen> {
                             (name: '${fetchedMessages[index].senderId.firstname} '
                               '${fetchedMessages[index].senderId.lastname}',
                             time: timeago.format(DateTime.parse(fetchedMessages[index].createdAt)),
+                            onPressed: (){
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context)
+                                  => ChatScreen()));
+                            },
                             profileUrl:  Links.cloudinaryLink+fetchedMessages[index].senderId.profilePhotoUrl,
                             message: '${fetchedMessages[index].message}',),
                         );

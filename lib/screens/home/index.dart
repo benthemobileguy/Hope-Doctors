@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hope_doctor/bloc/default.dart';
+import 'package:hope_doctor/model/health-tips-views.dart';
+import 'package:hope_doctor/screens/home/components/health-tip-view-component.dart';
 import 'package:hope_doctor/screens/home/components/new-messages.dart';
 import 'package:hope_doctor/screens/home/components/upcoming-appointments.dart';
+import 'package:hope_doctor/services/authentication-service.dart';
 import 'package:hope_doctor/shimmers/shimmer-home.dart';
+import 'package:intl/intl.dart';
 import 'package:hope_doctor/shimmers/shimmer-list-view.dart';
 import 'package:hope_doctor/theme/style.dart';
 import 'package:mdi/mdi.dart';
@@ -18,6 +22,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   MainBloc mainBloc;
+  AuthenticationService authenticationService;
   bool isDataLoaded = false;
   bool isInitialised = false;
 
@@ -25,6 +30,7 @@ class _HomePageState extends State<HomePage> {
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
+    authenticationService = new AuthenticationService(context: context);
     mainBloc = Provider.of<MainBloc>(context);
     if(!isInitialised){
       fetchNetworkRequests();
@@ -90,7 +96,8 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "Onuoha Okigwe",
+                '${mainBloc.user.firstname} '
+                    '${mainBloc.user.lastname}',
                 textAlign: TextAlign.start,
                 style: TextStyle(
                   fontSize: 14,
@@ -153,7 +160,7 @@ class _HomePageState extends State<HomePage> {
                               borderRadius: BorderRadius.all(Radius.circular(8)),
                             ),
                             child: Text(
-                              "Monday 14th, March",
+                              DateFormat('EEEE d, MMMM').format(DateTime.now()),
                               textAlign: TextAlign.start,
                               style: TextStyle(
                                 fontSize: 14,
@@ -179,7 +186,7 @@ class _HomePageState extends State<HomePage> {
                             child: Row(
                               children: [
                                 Text(
-                                  "184",
+                                  totalPatients,
                                   textAlign: TextAlign.start,
                                   style: TextStyle(
                                     fontSize: 14,
@@ -595,150 +602,7 @@ class _HomePageState extends State<HomePage> {
                           SizedBox(
                             height: 16,
                           ),
-                          Container(
-                            width: 300,
-                            padding: EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              color: greyColor2,
-                              borderRadius: BorderRadius.all(Radius.circular(8)),
-                            ),
-                            child: Row(
-                              children: [
-                                Text(
-                                  "Back Pain",
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    fontFamily: 'Lato',
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                                Spacer(),
-                                Text(
-                                  "120 views",
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    fontFamily: 'Lato',
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: 12,
-                          ),
-                          Container(
-                            width: 250,
-                            padding: EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              color: greyColor2,
-                              borderRadius: BorderRadius.all(Radius.circular(8)),
-                            ),
-                            child: Row(
-                              children: [
-                                Text(
-                                  "Sleeping",
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    fontFamily: 'Lato',
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                                Spacer(),
-                                Text(
-                                  "102 views",
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    fontFamily: 'Lato',
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: 12,
-                          ),
-                          Container(
-                            width: 200,
-                            padding: EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              color: greyColor2,
-                              borderRadius: BorderRadius.all(Radius.circular(8)),
-                            ),
-                            child: Row(
-                              children: [
-                                Text(
-                                  "Neck Position",
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    fontFamily: 'Lato',
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                                Spacer(),
-                                Text(
-                                  "53 views",
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    fontFamily: 'Lato',
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: 12,
-                          ),
-                          Container(
-                            width: 150,
-                            padding: EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              color: greyColor2,
-                              borderRadius: BorderRadius.all(Radius.circular(8)),
-                            ),
-                            child: Row(
-                              children: [
-                                Text(
-                                  "Sitting",
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    fontFamily: 'Lato',
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                                Spacer(),
-                                Text(
-                                  "22 views",
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    fontFamily: 'Lato',
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: 40,
-                          ),
+                      HealthTipViewComponent(),
                         ],
                       ),
                     ),
@@ -770,7 +634,7 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                               Text(
-                                "25",
+                                reservedProducts,
                                 textAlign: TextAlign.start,
                                 style: TextStyle(
                                   fontSize: 30,
@@ -799,7 +663,7 @@ class _HomePageState extends State<HomePage> {
                                 height: 10,
                               ),
                               Text(
-                                "63",
+                                totalProducts,
                                 textAlign: TextAlign.start,
                                 style: TextStyle(
                                   fontSize: 16,
@@ -944,6 +808,20 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> fetchNetworkRequests() async {
+    ///Stat
+    authenticationService.fetchStat().then((value){
+      setState(() {
+        totalProducts = '${value["count"]["total_product"]}';
+        reservedProducts = '${value["count"]["total_reserved_product"]}';
+        totalPatients = '${value["count"]["total_patient"]}';
+      });
+    });
+    ///Health tips views
+    authenticationService.fetchHealthTipsViews().then((value){
+      setState(() {
+        healthTipViews = HealthTipViews.fromJsonList(value['healthTipViews']);
+      });
+    });
    // mainBloc.fetchUpcomingAppointment(context);
    Future.wait({
   // mainBloc.fetchCurrentAppointment(context),
@@ -954,6 +832,8 @@ class _HomePageState extends State<HomePage> {
    });
   }
 }
+
+
 
 
 

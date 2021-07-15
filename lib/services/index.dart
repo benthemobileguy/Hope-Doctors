@@ -21,6 +21,7 @@ class ApiService {
     };
 
     if (bloc != null && bloc.bearerToken != null) {
+      print(bloc.bearerToken);
       headers.addAll({'Authorization': "Bearer ${bloc.bearerToken}"});
     }
 

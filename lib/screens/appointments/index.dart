@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_calendar_carousel/classes/event.dart';
 import 'package:circular_profile_avatar/circular_profile_avatar.dart';
+import 'package:hope_doctor/bloc/default.dart';
 import 'package:hope_doctor/screens/appointments/components/appointment_card.dart';
 import 'package:hope_doctor/theme/style.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart';
 import 'package:hope_doctor/utils/color.dart';
 import 'package:hope_doctor/utils/global-variables.dart';
@@ -16,6 +18,7 @@ class AppointmentsScreen extends StatefulWidget {
 class _AppointmentsScreenState extends State<AppointmentsScreen> {
   CalendarCarousel  _calendarCarouselNoHeader;
   int slotIndex = -1;
+  MainBloc mainBloc;
   EventList<Event> _markedDateMap = new EventList<Event>();
   DateTime _currentDate = DateTime.now();
   DateTime _currentDate2 = DateTime.now().subtract(Duration(days: 100));
@@ -31,6 +34,12 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
       color: Colors.amber,
     ),
   );
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    mainBloc = Provider.of<MainBloc>(context);
+  }
   @override
   Widget build(BuildContext context) {
     _calendarCarouselNoHeader = CalendarCarousel<Event>(
@@ -97,7 +106,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
       thisMonthDayBorderColor: textRed,
       weekFormat: false,
 //      firstDayOfWeek: 4,
-      markedDatesMap: _markedDateMap,
+     // markedDatesMap: _markedDateMap!=null?_markedDateMap,
      height: 550,
       selectedDateTime: _currentDate2,
       targetDateTime: _targetDateTime,
@@ -181,7 +190,8 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "Onuoha Okigwe",
+              '${mainBloc.user.firstname} '
+                  '${mainBloc.user.lastname}',
               textAlign: TextAlign.start,
               style: TextStyle(
                 fontSize: 14,
