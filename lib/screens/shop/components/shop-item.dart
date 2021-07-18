@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hope_doctor/bloc/default.dart';
+import 'package:hope_doctor/screens/shop/add-product-screen.dart';
 import 'package:hope_doctor/screens/shop/shop-details-screen.dart';
 import 'package:hope_doctor/theme/style.dart';
 import 'package:provider/provider.dart';
@@ -22,9 +23,13 @@ class ShopItem extends StatelessWidget {
         itemBuilder: (BuildContext context, int index) {
           return GestureDetector(
             onTap: (){
+              index != mainBloc.marketShop.length?
               Navigator.push(context,
                   MaterialPageRoute(builder: (context)
-                  => ShopDetailsScreen(index: index)));
+                  => ShopDetailsScreen(index: index))):
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context)
+                  => AddProductScreen()));
             },
             child: Container(
               margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
@@ -35,7 +40,7 @@ class ShopItem extends StatelessWidget {
                     borderRadius: BorderRadius.all
                       (Radius.circular(8)),
                     border: Border.all(color: Color.fromRGBO
-                      (7, 121, 101, 0.8), width: 1)
+                      (7, 121, 101, 0.8), width: 1.1)
                 ),
                 child:  Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -64,7 +69,7 @@ class ShopItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    height: 130,
+                    height: 140,
                     width: 240,
                     margin: EdgeInsets.symmetric(horizontal: 10),
                     decoration: BoxDecoration(
@@ -73,7 +78,7 @@ class ShopItem extends StatelessWidget {
                         primaryColor.withOpacity(0.3),
                             width: 2),
                         image: DecorationImage(
-                            fit: BoxFit.contain,
+                            fit: BoxFit.fill,
                             image: NetworkImage(
                               "${mainBloc.marketShop[index].files[0]}",
                             ))),
