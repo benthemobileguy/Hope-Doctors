@@ -1,38 +1,64 @@
 import 'package:flutter/material.dart';
-import 'package:hope_doctor/model/market-shop.dart';
+import 'package:hope_doctor/bloc/default.dart';
 import 'package:hope_doctor/theme/style.dart';
-
+import 'package:provider/provider.dart';
 class ShopItem extends StatelessWidget {
-  final List<MarketShop> shopItem;
-
   const ShopItem({
     Key key,
-    this.shopItem,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-      shrinkWrap: true,
-      gridDelegate:
-      SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          childAspectRatio: 0.75),
-      itemCount: shopItem.length,
-      itemBuilder: (context, index) {
-        return GestureDetector(
-          onTap: (){
-            // Navigator.push(context,
-            //     MaterialPageRoute(builder: (context)
-            //     => ProductDetailsPage(item: shopItem[index],)));
-          },
-          child: Container(
-            child: Column(
+    MainBloc mainBloc = Provider.of<MainBloc>(context);
+    return Expanded(
+      child: GridView.builder(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 4,
+          childAspectRatio: MediaQuery.of(context).size.width /
+              (MediaQuery.of(context).size.height / 1.1),
+        ),
+        itemCount: mainBloc.marketShop.length + 1,
+        itemBuilder: (BuildContext context, int index) {
+          return Container(
+            margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+            child:  index == mainBloc.marketShop.length?
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 6, vertical:6 ),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all
+                    (Radius.circular(8)),
+                  border: Border.all(color: Color.fromRGBO
+                    (7, 121, 101, 0.8), width: 1)
+              ),
+              child:  Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  new Image.asset("images/add_circle.png",
+                    width: 64,
+                    height: 64,),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    "ADD NEW",
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                      fontSize: 10,
+                      fontFamily: 'Lato',
+                      color: darkerText,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ],
+              ),
+            ):Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
                   height: 130,
+                  width: 240,
                   margin: EdgeInsets.symmetric(horizontal: 10),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(4),
@@ -41,63 +67,101 @@ class ShopItem extends StatelessWidget {
                           width: 2),
                       image: DecorationImage(
                           fit: BoxFit.contain,
-                          image: NetworkImage(
-                            "${shopItem[index].files[0]}",
+                          image: AssetImage(
+                            "images/img_1.png",
                           ))),
                 ),
                 SizedBox(
-                  height: 3,
+                  height: 5,
                 ),
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: 10),
                   child: Text(
-                    "${shopItem[index].title}",
+                    "${mainBloc.marketShop[index].title}",
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: 14,
+                      fontSize: 20,
                       fontFamily: 'Lato',
-                      color: normalText,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 3,
-                ),
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 10),
-                  child: Text(
-                    "${shopItem[index].price}",
-                    textAlign: TextAlign.start,
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontFamily: 'Lato',
-                      color: primaryColor,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 3,
-                ),
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 10),
-                  child: Text(
-                    "${shopItem[index].quantity} Products Reserved",
-                    textAlign: TextAlign.start,
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontFamily: 'Lato',
-                      color: greyColor2,
+                      color: normalTextBold,
                       fontWeight: FontWeight.w400,
                     ),
                   ),
                 ),
+                SizedBox(
+                  height: 5,
+                ),
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 10),
+                  child: Row(
+                    children: [
+                      Text(
+                        "AVAILABLE IN STOCK",
+                        textAlign: TextAlign.start,
+                        style: TextStyle(
+                          fontSize: 10,
+                          fontFamily: 'Lato',
+                          color: darkerText,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 35,
+                      ),
+                      Text(
+                        "RESERVED PRODUCTS",
+                        textAlign: TextAlign.start,
+                        style: TextStyle(
+                          fontSize: 10,
+                          fontFamily: 'Lato',
+                          color: darkerText,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 3,
+                ),
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 10),
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Text(
+                        "${mainBloc.marketShop[index].quantity}",
+                        textAlign: TextAlign.start,
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontFamily: 'Lato',
+                          color: normalTextBold,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 107,
+                      ),
+                      Text(
+                        "0",
+                        textAlign: TextAlign.start,
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontFamily: 'Lato',
+                          color: normalTextBold,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
-          ),
-        );
-      },
+          );
+
+        },
+      ),
     );
   }
 }

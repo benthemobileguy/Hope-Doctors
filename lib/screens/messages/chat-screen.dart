@@ -136,7 +136,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     color: primaryColor,
                     onPressed: () {
                       if (messageController.text != "") {
-
+                       sendMessage();
                       }
                     },
                     shape: new RoundedRectangleBorder(
@@ -157,22 +157,52 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   Future<void> sendMessage() async {
-    print(messageController.text);
-    Navigator.pop(context);
+    print(widget.messages.receiverId.id);
     Map<String, dynamic> data = new Map();
     data = {
-      "type": messageType,
-      "receiver_id": 16,
+      "type": widget.messages.type,
+      "receiver_id": widget.messages.receiverId.id,
       "message": messageController.text
     };
     Map<String, dynamic> _res = await appointmentService.sendMessage(data);
     if (_res["status"] == "success") {
       setState(() {
-        mainBloc.message.add(Message(type: messageType, message: messageController.text));
-        msgTypeIndex = -1;
+
       });
       messageController.clear();
     }
   }
-
+  // List<Widget> comments() {
+  //   List listings = List<Widget>();
+  //   int i = 0;
+  //   for (i = 0; i < userMessages.length; i++) {
+  //     listings.add(
+  //       Bubble(
+  //         borderColor: Colors.transparent,
+  //         borderWidth: 0,
+  //         margin: BubbleEdges.only(top: 10, right: 10),
+  //         padding: BubbleEdges.all(5),
+  //         alignment: userMessages[i].user1mail==
+  //             mainBloc.user.emailAddress?Alignment.topRight:Alignment.topLeft,
+  //         nip: BubbleNip.rightTop,
+  //         color: userMessages[i].user1mail==
+  //             mainBloc.user.emailAddress?customRed:Colors.grey[400],
+  //         child: Text(
+  //           userMessages[i].messages,
+  //           style: TextStyle(
+  //             fontWeight: FontWeight.w400,
+  //             fontFamily: 'Mulish',
+  //             color: userMessages[i].user1mail==
+  //                 mainBloc.user.emailAddress?Colors.white:Colors.black,
+  //             fontSize: _sizeConfig.textSize(
+  //               context,
+  //               Converters.configSize(12),
+  //             ),
+  //           ),
+  //         ),
+  //       ),
+  //     );
+  //   }
+  //   return listings;
+  // }
 }

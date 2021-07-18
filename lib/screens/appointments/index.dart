@@ -105,9 +105,9 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
       ),
       thisMonthDayBorderColor: textRed,
       weekFormat: false,
-//      firstDayOfWeek: 4,
+      firstDayOfWeek: 4,
      // markedDatesMap: _markedDateMap!=null?_markedDateMap,
-     height: 550,
+     height: 1100,
       selectedDateTime: _currentDate2,
       targetDateTime: _targetDateTime,
       customGridViewPhysics: NeverScrollableScrollPhysics(),
@@ -299,7 +299,9 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                  height: 20,
                ),
                Text(
-                 "Appointments Through The Day",
+                 mainBloc.currentAppointment!=null?
+                 "Appointments Through The Day":
+                 "Appointments Through The Day (NONE)",
                  textAlign: TextAlign.start,
                  style: TextStyle(
                    fontSize: 14,
@@ -311,22 +313,8 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                SizedBox(
                  height: 10,
                ),
-              AppointmentCard(),
-               SizedBox(
-                 height: 5,
-               ),
-               AppointmentCard(),
-               SizedBox(
-                 height: 5,
-               ),
-               AppointmentCard(),
-               SizedBox(
-                 height: 5,
-               ),
-               AppointmentCard(),
-               SizedBox(
-                 height: 5,
-               ),
+               mainBloc.currentAppointment!=null?
+               AppointmentCard():Container(),
              ],
            ),
          ),

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hope_doctor/bloc/default.dart';
 import 'package:hope_doctor/model/health-tips-views.dart';
+import 'package:hope_doctor/screens/home/base.dart';
 import 'package:hope_doctor/screens/home/components/health-tip-view-component.dart';
 import 'package:hope_doctor/screens/home/components/new-messages.dart';
 import 'package:hope_doctor/screens/home/components/upcoming-appointments.dart';
+import 'package:hope_doctor/screens/messages/chat-screen.dart';
+import 'package:hope_doctor/screens/notes/index.dart';
 import 'package:hope_doctor/services/authentication-service.dart';
 import 'package:hope_doctor/shimmers/shimmer-home.dart';
 import 'package:intl/intl.dart';
@@ -228,7 +231,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                       child: Stack(
                         children: [
-                          Positioned(
+                          mainBloc.currentAppointment!=null?  Positioned(
                             right: 0,
                             top: 0,
                             child: Column(
@@ -395,7 +398,8 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ],
                             ),
-                          ),
+                          ):
+                          Container(),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -403,7 +407,8 @@ class _HomePageState extends State<HomePage> {
                                 height: 10,
                               ),
                               Text(
-                                "Currently Attending",
+                                mainBloc.currentAppointment!=null?
+                                "Currently Attending":"No Current Appointments",
                                 textAlign: TextAlign.start,
                                 style: TextStyle(
                                   fontSize: 16,
@@ -444,7 +449,8 @@ class _HomePageState extends State<HomePage> {
                                     width: 10,
                                   ),
                                   Text(
-                                    "Kendrick Zacari",
+                                    "${mainBloc.user.firstname} "
+                                        "${mainBloc.user.lastname}",
                                     textAlign: TextAlign.start,
                                     style: TextStyle(
                                       fontSize: 18,
@@ -458,48 +464,53 @@ class _HomePageState extends State<HomePage> {
                               SizedBox(
                                 height: 20,
                               ),
-                              Text(
-                                "APPOINTMENT TYPE",
-                                textAlign: TextAlign.start,
-                                style: TextStyle(
-                                  fontSize: 10,
-                                  fontFamily: 'Lato',
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.normal,
-                                ),
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Text(
-                                "Initial Visit\n(Scan, Analysis, Adjustment)",
-                                textAlign: TextAlign.start,
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontFamily: 'Lato',
-                                  color: ashGreen,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                "N31,150",
-                                textAlign: TextAlign.start,
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontFamily: 'Lato',
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
+                              mainBloc.currentAppointment!=null?Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "APPOINTMENT TYPE",
+                                    textAlign: TextAlign.start,
+                                    style: TextStyle(
+                                      fontSize: 10,
+                                      fontFamily: 'Lato',
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text(
+                                    "Initial Visit\n(Scan, Analysis, Adjustment)",
+                                    textAlign: TextAlign.start,
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontFamily: 'Lato',
+                                      color: ashGreen,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(
+                                    "N31,150",
+                                    textAlign: TextAlign.start,
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontFamily: 'Lato',
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                ],
+                              ):Container(),
                               Row(
                                 children: [
-                                  Container(
+                                  mainBloc.upcomingAppointment!=null?Container(
                                     width: 170,
                                     height:50,
                                     child: MainButton(
@@ -529,17 +540,21 @@ class _HomePageState extends State<HomePage> {
                                         ],
                                       ),
                                     ),
-                                  ),
-                                  SizedBox(
+                                  ):Container(),
+                                  mainBloc.upcomingAppointment!=null?SizedBox(
                                     width: 16,
-                                  ),
+                                  ):Container(),
                                   Container(
                                     width: 170,
                                     height:50,
                                     child: MainButton(
                                       borderColor: Colors.white,
                                       disabledColor: Colors.white,
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Navigator.push(context,
+                                            MaterialPageRoute(builder: (context)
+                                            => NotesScreen()));
+                                      },
                                       color: Colors.transparent,
                                       child: Row(
                                         mainAxisSize: MainAxisSize.min,
@@ -695,105 +710,138 @@ class _HomePageState extends State<HomePage> {
                       SizedBox(
                         height: 30,
                       ),
-                      Row(
+                    mainBloc.upcomingAppointment!=null?
+                    Column(
                         children: [
-                          Text(
-                            "Upcoming\nAppointments",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontFamily: 'Lato',
-                              color: greyColor2,
-                              fontWeight: FontWeight.w700,
-                            ),
+                          Row(
+                            children: [
+                              Text(
+                                "Upcoming\nAppointments",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  fontFamily: 'Lato',
+                                  color: greyColor2,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Container(
+                                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: greyColor2, width: 1),
+                                  color: greyColor2,
+                                  borderRadius: BorderRadius.all(Radius.circular(8)),
+                                ),
+                                child: Text(
+                                  "View All",
+                                  textAlign: TextAlign.start,
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    fontFamily: 'Lato',
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                                ),
+                              ),
+
+                            ],
                           ),
                           SizedBox(
-                            width: 10,
+                            height: 20,
                           ),
-                          Container(
-                            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                            decoration: BoxDecoration(
-                              border: Border.all(color: greyColor2, width: 1),
-                              color: greyColor2,
-                              borderRadius: BorderRadius.all(Radius.circular(8)),
-                            ),
-                            child: Text(
-                              "View All",
-                              textAlign: TextAlign.start,
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontFamily: 'Lato',
-                                color: Colors.white,
-                                fontWeight: FontWeight.normal,
-                              ),
-                            ),
+                          UpcomingCard(),
+                          SizedBox(
+                            height: 5,
                           ),
-
+                          UpcomingCard(),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          UpcomingCard(),
+                          SizedBox(
+                            height: 40,
+                          ),
                         ],
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      UpcomingCard(),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      UpcomingCard(),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      UpcomingCard(),
-                      SizedBox(
-                        height: 40,
-                      ),
-                      Row(
+                      ):Container(),
+
+                     mainBloc.messages!=null?
+                     Column(
+                       mainAxisSize: MainAxisSize.min,
                         children: [
-                          Text(
-                            "New Messages",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontFamily: 'Lato',
-                              color: greyColor2,
-                              fontWeight: FontWeight.w700,
+                          Container(
+                            child: Row(
+                              children: [
+                                Text(
+                                  "New Messages",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    fontFamily: 'Lato',
+                                    color: greyColor2,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                GestureDetector(
+                                  onTap: (){
+                                    Navigator.pushReplacement(context,
+                                        MaterialPageRoute(builder: (context)
+                                        => Base(currentIndex: 2,)));
+                                  },
+                                  child: Container(
+                                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(color: greyColor2, width: 1),
+                                      color: greyColor2,
+                                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                                    ),
+                                    child: Text(
+                                      "View All",
+                                      textAlign: TextAlign.start,
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        fontFamily: 'Lato',
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.normal,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+
+                              ],
                             ),
+
                           ),
                           SizedBox(
-                            width: 10,
+                            height: 20,
                           ),
-                          Container(
-                            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                            decoration: BoxDecoration(
-                              border: Border.all(color: greyColor2, width: 1),
-                              color: greyColor2,
-                              borderRadius: BorderRadius.all(Radius.circular(8)),
-                            ),
-                            child: Text(
-                              "View All",
-                              textAlign: TextAlign.start,
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontFamily: 'Lato',
-                                color: Colors.white,
-                                fontWeight: FontWeight.normal,
-                              ),
-                            ),
+                          ListView.builder(
+                            reverse: true,
+                            shrinkWrap: true,
+                            itemCount: 3,
+                              itemBuilder: (BuildContext context, int index) {
+                                return NewMessages(
+                                 name: '${mainBloc.messages[index].senderId.firstname} '
+                                     '${mainBloc.messages[index].senderId.lastname}',
+                                  messageType: mainBloc.messages[index].type,
+                                  onPressed: (){
+                                    Navigator.push(context,
+                                        MaterialPageRoute(builder: (context)
+                                        => ChatScreen()));
+                                  },
+                                );
+                              },
                           ),
-
+                          SizedBox(
+                            height: 5,
+                          ),
                         ],
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      NewMessages(),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      NewMessages(),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      NewMessages(),
+                      ):Container(),
                     ],
                   ),
 
@@ -808,6 +856,15 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> fetchNetworkRequests() async {
+    mainBloc.fetchCurrentAppointment(context).then((value){
+      print(value);
+    });
+    mainBloc.fetchUpcomingAppointment(context).then((value){
+      print(value);
+    });
+    mainBloc.fetchMessages(context).then((value){
+
+    });
     ///Stat
     authenticationService.fetchStat().then((value){
       setState(() {
@@ -822,9 +879,9 @@ class _HomePageState extends State<HomePage> {
         healthTipViews = HealthTipViews.fromJsonList(value['healthTipViews']);
       });
     });
-   // mainBloc.fetchUpcomingAppointment(context);
+
    Future.wait({
-  // mainBloc.fetchCurrentAppointment(context),
+    mainBloc.fetchHealthTips(context),
    }).then((value) {
      setState(() {
        isDataLoaded = true;

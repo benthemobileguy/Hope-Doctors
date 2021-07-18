@@ -210,7 +210,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
                             onPressed: (){
                               Navigator.push(context,
                                   MaterialPageRoute(builder: (context)
-                                  => ChatScreen()));
+                                  => ChatScreen(messages: fetchedMessages[index],)));
                             },
                             profileUrl:  Links.cloudinaryLink+fetchedMessages[index].senderId.profilePhotoUrl,
                             message: '${fetchedMessages[index].message}',),

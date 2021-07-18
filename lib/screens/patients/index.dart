@@ -134,7 +134,7 @@ class _PatientsScreenState extends State<PatientsScreen> {
                   child: Row(
                     children: [
                       Text(
-                        "184",
+                        totalPatients,
                         textAlign: TextAlign.start,
                         style: TextStyle(
                           fontSize: 14,
@@ -259,23 +259,23 @@ class _PatientsScreenState extends State<PatientsScreen> {
             SizedBox(
               height: 10,
             ),
-            PatientAppointmentCard(),
-            SizedBox(
-              height: 10,
+            mainBloc.currentAppointment!=null?
+            PatientAppointmentCard():
+            Center(
+              child: Container(
+                margin: EdgeInsets.only(top: 300),
+                child: Text(
+                  "No Current Appointments",
+                  textAlign: TextAlign.start,
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontFamily: 'Lato',
+                    color: primaryColor,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ),
             ),
-            PatientAppointmentCard(),
-            SizedBox(
-              height: 10,
-            ),
-            PatientAppointmentCard(),
-            SizedBox(
-              height: 10,
-            ),
-            PatientAppointmentCard(),
-            SizedBox(
-              height: 10,
-            ),
-            PatientAppointmentCard(),
           ],
         ),
       ),

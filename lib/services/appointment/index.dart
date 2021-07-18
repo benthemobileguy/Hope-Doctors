@@ -4,6 +4,7 @@ import 'package:hope_doctor/model/current-appointment.dart';
 import 'package:hope_doctor/model/date-slots.dart';
 import 'package:hope_doctor/model/days-left-count.dart';
 import 'package:hope_doctor/model/health-tips.dart';
+import 'package:hope_doctor/model/message.dart';
 import 'package:hope_doctor/model/next-appointment.dart';
 import 'package:hope_doctor/model/plans.dart';
 import 'package:hope_doctor/model/upcoming-appointment-count.dart';
@@ -95,10 +96,13 @@ class  AppointmentService extends ApiService {
     bloc = Provider.of<MainBloc>(context, listen: false);
     Map<String, dynamic> _data =
     await get('doc/current/appointment');
-    print(_data);
+    print(_data['currentAppointment']);
     CurrentAppointment _currentAppointment;
-    _currentAppointment = CurrentAppointment.fromJson(_data['data']);
-    bloc.currentAppointment = _currentAppointment;
+    if(_data['currentAppointment'].toString()!="[]"){
+      _currentAppointment = CurrentAppointment.fromJson(_data['currentAppointment']);
+      bloc.currentAppointment = _currentAppointment;
+    }
+
     return _currentAppointment;
   }
   /// get upcoming appointment
@@ -109,8 +113,11 @@ class  AppointmentService extends ApiService {
     print(_data['upcomingAppointment']);
     UpcomingAppointment _upcomingAppointment;
     try{
-      _upcomingAppointment = UpcomingAppointment.fromJson(_data['upcomingAppointment']);
-      bloc.upcomingAppointment = _upcomingAppointment;
+      if(_data['upcomingAppointment'].toString()!="[]"){
+        _upcomingAppointment = UpcomingAppointment.fromJson(_data['upcomingAppointment']);
+        bloc.upcomingAppointment = _upcomingAppointment;
+      }
+
     }catch(e){
       print(e.toString());
     }
@@ -122,5 +129,16 @@ class  AppointmentService extends ApiService {
     Map<String, dynamic> _response = await post('message/create', data);
 
     return _response;
+  }
+  /// get user messages
+  Future<List<Message>> getUserMessages() async {
+    bloc = Provider.of<MainBloc>(context, listen: false);
+    Map<String, dynamic> _data =
+    await get('message/current/user');
+    print(_data);
+    List<Message> _message;
+    _message = Message.fromJsonList(_data['data']['data']);
+    bloc.message = _message;
+    return _message;
   }
 }
