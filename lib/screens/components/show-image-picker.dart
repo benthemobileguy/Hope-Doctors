@@ -30,7 +30,7 @@ void showImagePicker(BuildContext context, Function cameraFunction, galleryFunct
                   )),
 
               Text(
-                'Update profile picture',
+                'Select Photo',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontSize: 20,

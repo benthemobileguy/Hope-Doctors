@@ -36,6 +36,8 @@ dev_dependencies:
   provider: ^5.0.0
   bubble: ^1.2.1
   emojis: ^0.9.3
+  image_picker: ^0.7.4
+  progress_dialog: ^1.2.4
   circular_profile_avatar: ^2.0.0
   video_player: ^2.1.1
   shimmer: ^2.0.0
