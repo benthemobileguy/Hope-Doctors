@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hope_doctor/bloc/default.dart';
 import 'package:hope_doctor/screens/components/main-button.dart';
+import 'package:hope_doctor/services/shop/index.dart';
 import 'package:hope_doctor/theme/style.dart';
 import 'package:hope_doctor/utils/color.dart';
 import 'package:provider/provider.dart';
+
 class ShopDetailsScreen extends StatefulWidget {
   final int index;
   const ShopDetailsScreen({Key key, this.index}) : super(key: key);
@@ -14,12 +16,21 @@ class ShopDetailsScreen extends StatefulWidget {
 
 class _ShopDetailsScreenState extends State<ShopDetailsScreen> {
   MainBloc mainBloc;
+  MarketService marketService;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    marketService = new MarketService(context: context);
+  }
+
   @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
     mainBloc = Provider.of<MainBloc>(context);
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,40 +65,102 @@ class _ShopDetailsScreenState extends State<ShopDetailsScreen> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  children: [
-                    new Image.asset(
-                      'images/delete.png',
-                      width: 40,
-                      height: 40,),
-                    SizedBox(
-                      width: 10,
+                GestureDetector(
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: Text(
+                            mainBloc.marketShop[widget.index].title,
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontFamily: 'Lato',
+                              color: customRed,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          content: Text(
+                            'Are you sure you want to delete?',
+                            style: TextStyle(
+                              fontSize: 14.5,
+                              fontFamily: 'Lato',
+                              color: chatTextColor,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                          actions: <Widget>[
+                            new TextButton(
+                              onPressed: () {
+                                Navigator.of(context, rootNavigator: true).pop(
+                                    false); // dismisses only the dialog and returns false
+                              },
+                              child: Text(
+                                'No',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontFamily: 'Lato',
+                                  color: textColor,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                                deleteProduct();
+                              },
+                              child: Text(
+                                'Yes',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontFamily: 'Lato',
+                                  color: customRed,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  },
+                  child: Container(
+                    child: Row(
+                      children: [
+                        new Image.asset(
+                          'images/delete.png',
+                          width: 40,
+                          height: 40,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          "Delete Product",
+                          textAlign: TextAlign.start,
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontFamily: 'Lato',
+                            color: customRed,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ],
                     ),
-                    Text(
-                      "Delete Product",
-                      textAlign: TextAlign.start,
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontFamily: 'Lato',
-                        color: customRed,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-
-                  ],
+                  ),
                 ),
                 SizedBox(
                   height: 20,
                 ),
                 Container(
-                  height: MediaQuery.of(context).size.height *0.5,
-                  width: MediaQuery.of(context).size.width *0.5,
+                  height: MediaQuery.of(context).size.height * 0.5,
+                  width: MediaQuery.of(context).size.width * 0.5,
                   margin: EdgeInsets.symmetric(horizontal: 10),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(4),
-                      border: Border.all(color:
-                      primaryColor.withOpacity(0.3),
-                          width: 2),
+                      border: Border.all(
+                          color: primaryColor.withOpacity(0.3), width: 2),
                       image: DecorationImage(
                           fit: BoxFit.fill,
                           image: NetworkImage(
@@ -170,9 +243,7 @@ class _ShopDetailsScreenState extends State<ShopDetailsScreen> {
                   height: 60,
                   width: 180,
                   child: MainButton(
-                    onPressed: (){
-
-                    },
+                    onPressed: () {},
                     borderColor: primaryColor,
                     color: primaryColor,
                     child: Row(
@@ -240,5 +311,15 @@ class _ShopDetailsScreenState extends State<ShopDetailsScreen> {
         ),
       ),
     );
+  }
+
+  void deleteProduct() {
+    marketService
+        .deleteProduct(mainBloc.marketShop[widget.index].id.toString())
+        .then((value) {
+          mainBloc.fetchMarketShop(context).then((value){
+            Navigator.pop(context);
+          });
+    });
   }
 }

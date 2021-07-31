@@ -23,6 +23,7 @@ final Color hintColor = HexColor("#C4C4C4");
 final Color lightGreen = HexColor("#D7F4EF");
 final Color borderColor2 = HexColor("#E5EEEC");
 final Color textRed = HexColor("#E33A3A");
+final Color lightGreenBg = HexColor("#EAF7F4");
 final Color normalText = HexColor("#222222");
 final Color normalTextBold = HexColor("#212121");
 final Color normalTexth1 = HexColor("#444444");

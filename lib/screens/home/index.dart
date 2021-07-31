@@ -865,6 +865,7 @@ class _HomePageState extends State<HomePage> {
     mainBloc.fetchMessages(context).then((value){
 
     });
+
     ///Stat
     authenticationService.fetchStat().then((value){
       setState(() {
@@ -882,6 +883,7 @@ class _HomePageState extends State<HomePage> {
 
    Future.wait({
     mainBloc.fetchHealthTips(context),
+    mainBloc.fetchReservedProducts(context)
    }).then((value) {
      setState(() {
        isDataLoaded = true;

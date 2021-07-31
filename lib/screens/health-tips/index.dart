@@ -118,8 +118,8 @@ class _HealthTipsScreenState extends State<HealthTipsScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-
           HealthTipsComponent(),
+
         ],
       ),
     );
