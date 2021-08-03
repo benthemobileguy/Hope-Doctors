@@ -19,9 +19,12 @@ class AppointmentsScreen extends StatefulWidget {
 class _AppointmentsScreenState extends State<AppointmentsScreen> {
   CalendarCarousel _calendarCarouselNoHeader;
   int slotIndex = -1;
+  bool isLoading = false;
   String selectedDate = '${DateFormat('EEEE d, MMMM yyyy').format(DateTime.now())}';
+  final timeFormat = new DateFormat('hh:mm');
   MainBloc mainBloc;
 
+  String defaultDropDownValue = "Does Not Repeat";
   StateSetter dialogState;
   bool unavailableChecked = false;
   EventList<Event> _markedDateMap = new EventList<Event>();
@@ -29,6 +32,9 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
   DateTime _currentDate2 = DateTime.now().subtract(Duration(days: 100));
   String _currentMonth = DateFormat.yMMM().format(DateTime.now());
   DateTime _targetDateTime = DateTime.now();
+
+  String startTime = '08:00 AM';
+  String endTime = '06:00 PM';
   static Widget _eventIcon = new Container(
     decoration: new BoxDecoration(
         color: Colors.lime,
@@ -58,7 +64,9 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
           print(date.toString().substring(0, 10));
         });
         this.dialogState(() {
-          if (slotIndex != -1) {}
+          if (slotIndex != -1) {
+
+          }
           slotIndex = -1;
           _currentDate2 = date;
           selectedDate = '${DateFormat('EEEE d, MMMM yyyy').format(date)}';
@@ -336,6 +344,12 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
   }
 
   void setAvailability() {
+    setState(() {
+      startTime = '08:00 AM';
+      endTime = '06:00 PM';
+      isLoading = false;
+      defaultDropDownValue = 'Does Not Repeat';
+    });
     showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -367,10 +381,23 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                             height: 45,
                             width: 120,
                             child: MainButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                dialogState(() {
+                                  isLoading = true;
+                                });
+                              },
                               borderColor: primaryColor,
                               color: primaryColor,
-                              child: Text(
+                              child: isLoading?SizedBox(
+                                height: 20,
+                                width: 20,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                  valueColor:
+                                  new AlwaysStoppedAnimation<Color>(
+                                      Colors.white),
+                                ),
+                              ):Text(
                                 "Save",
                                 textAlign: TextAlign.start,
                                 style: TextStyle(
@@ -458,22 +485,39 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                           SizedBox(
                             width: 30,
                           ),
-                          Container(
-                            decoration:BoxDecoration(
-                                color:lightGreenBg,
-                                borderRadius: BorderRadius.all
-                                  (Radius.circular(8))
-                            ),
-                            padding:EdgeInsets.all(12),
-                            margin:EdgeInsets.symmetric(horizontal: 5),
-                            child: Text(
-                              "08:00am",
-                              textAlign: TextAlign.start,
-                              style: TextStyle(
-                                fontSize: 14.5,
-                                fontFamily: 'Lato',
-                                color: normalTextBold,
-                                fontWeight: FontWeight.w400,
+                          GestureDetector(
+                            onTap: () async {
+                              TimeOfDay timeOfDay = await showTimePicker(
+                                context: context,
+                                initialTime: const TimeOfDay(hour: 08, minute: 00),
+                                builder: (BuildContext context, Widget child) {
+                                  return Theme(
+                                    data: ThemeData.dark(),
+                                    child: child,
+                                  );
+                                },
+                              );
+                              dialogState(() {
+                                startTime = timeOfDay.format(context);
+                              });
+                            },
+                            child: Container(
+                              decoration:BoxDecoration(
+                                  color:lightGreenBg,
+                                  borderRadius: BorderRadius.all
+                                    (Radius.circular(8))
+                              ),
+                              padding:EdgeInsets.all(12),
+                              margin:EdgeInsets.symmetric(horizontal: 5),
+                              child: Text(
+                                startTime,
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                  fontSize: 14.5,
+                                  fontFamily: 'Lato',
+                                  color: normalTextBold,
+                                  fontWeight: FontWeight.w400,
+                                ),
                               ),
                             ),
                           ),
@@ -487,55 +531,97 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                               fontWeight: FontWeight.w400,
                             ),
                           ),
-                          Container(
-                            decoration:BoxDecoration(
-                                color:lightGreenBg,
-                                borderRadius: BorderRadius.all
-                                  (Radius.circular(8))
-                            ),
-                            padding:EdgeInsets.all(12),
-                            margin:EdgeInsets.symmetric(horizontal: 5),
-                            child: Text(
-                              "03:00pm",
-                              textAlign: TextAlign.start,
-                              style: TextStyle(
-                                fontSize: 14.5,
-                                fontFamily: 'Lato',
-                                color: normalTextBold,
-                                fontWeight: FontWeight.w400,
+                          GestureDetector(
+                            onTap: () async {
+                              TimeOfDay timeOfDay = await showTimePicker(
+                                context: context,
+                                initialTime: const TimeOfDay(hour: 18, minute: 00),
+                                builder: (BuildContext context, Widget child) {
+                                  return Theme(
+                                    data: ThemeData.dark(),
+                                    child: child,
+                                  );
+                                },
+                              );
+                              dialogState(() {
+                              endTime = timeOfDay.format(context);
+                              });
+                            },
+                            child: Container(
+                              decoration:BoxDecoration(
+                                  color:lightGreenBg,
+                                  borderRadius: BorderRadius.all
+                                    (Radius.circular(8))
+                              ),
+                              padding:EdgeInsets.all(12),
+                              margin:EdgeInsets.symmetric(horizontal: 5),
+                              child: Text(
+                                endTime,
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                  fontSize: 14.5,
+                                  fontFamily: 'Lato',
+                                  color: normalTextBold,
+                                  fontWeight: FontWeight.w400,
+                                ),
                               ),
                             ),
                           ),
                           SizedBox(
                             width: 30,
                           ),
-                          Container(
-                            decoration:BoxDecoration(
-                                color:lightGreenBg,
-                                borderRadius: BorderRadius.all
-                                  (Radius.circular(8))
-                            ),
-                            padding:EdgeInsets.all(12),
-                            margin:EdgeInsets.symmetric(horizontal: 5),
-                            child: Row(
-                              children: [
-                                Text(
-                                  "Does Not Repeat",
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(
-                                    fontSize: 14.5,
-                                    fontFamily: 'Lato',
-                                    color: normalTextBold,
-                                    fontWeight: FontWeight.w400,
-                                  ),
+                          Stack(
+                            children: [
+                              Container(
+                                decoration:BoxDecoration(
+                                    color:lightGreenBg,
+                                    borderRadius: BorderRadius.all
+                                      (Radius.circular(8))
                                 ),
-                                SizedBox(
-                                  width: 6,
+                                padding:EdgeInsets.all(12),
+                                margin:EdgeInsets.symmetric(horizontal: 5),
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      defaultDropDownValue,
+                                      textAlign: TextAlign.start,
+                                      style: TextStyle(
+                                        fontSize: 14.5,
+                                        fontFamily: 'Lato',
+                                        color: normalTextBold,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 6,
+                                    ),
+                                    Icon(Icons.arrow_drop_down_outlined,
+                                      color: normalTextBold,)
+                                  ],
                                 ),
-                                Icon(Icons.arrow_drop_down_outlined,
-                                  color: normalTextBold,)
-                              ],
-                            ),
+                              ),
+                              DropdownButtonHideUnderline(
+                                child: DropdownButton<String>(
+                                  items: <String>['Does Not Repeat', 'Daily', 'Weekly',].map((String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: new Text(value,
+                                        style: TextStyle(
+                                          fontSize: 14.5,
+                                          fontFamily: 'Lato',
+                                          color: normalTextBold,
+                                          fontWeight: FontWeight.w400,
+                                        ),),
+                                    );
+                                  }).toList(),
+                                  onChanged: (val) {
+                                    dialogState(() {
+                                   defaultDropDownValue = val;
+                                    });
+                                  },
+                                ),
+                              )
+                            ],
                           ),
                         ],
                       ),

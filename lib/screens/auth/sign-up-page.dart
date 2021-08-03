@@ -566,8 +566,7 @@ class _RegisterPageState extends State<SignUpPage> {
                               color: Colors.white,
                               fontWeight: FontWeight.w700,
                             ),
-                          )
-                              : SizedBox(
+                          ): SizedBox(
                             height: 20,
                             width: 20,
                             child: CircularProgressIndicator(
